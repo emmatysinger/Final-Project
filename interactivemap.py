@@ -21,8 +21,8 @@ def capitalquiz(event):
     if capital == True:
         n = random.randint(0, 50)
         state = states[n]
-        answer = input("What is the capital of" + states[n] + "? ")
-        if answer == states_facts[n]:
+        answer = input("What is the capital of" + state + "? ")
+        if answer == states_facts[state]:
             print ("CORRECT!")
         else:
             print ("Incorrect, the correct answer is" + capitals[n])
