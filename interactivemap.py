@@ -14,10 +14,10 @@ capital = FALSE
 states = {'Alabama':0, 'Alaska':1, 'Arizona':2, 'Arkansas':3, 'California':4, 'Colorado':5, 'Connecticut':6,}
 capitals = ["Montegomery", "Juneau", "Phoenix", "Little Rock", "Sacramento", "Denver", "Hartford"]
         
-def capitalquiz:
+def capitalquiz(event):
     global capital, states, capitals
     capital = not capital
-    while capital = TRUE:
+    while capital == TRUE:
         n = randint
         answer = input("What is the capital of" + n + "? ")
         if answer == capitals[n]:
@@ -26,11 +26,11 @@ def capitalquiz:
             print ("Incorrect, the correct answer is" + capitals[n])
     
     
-def facts:
+# def facts(event):
 
-def findquiz:
+# def findquiz(event):
 
 myapp.run()
-myapp.ListenKeyEvent('keydown','c',capitalquiz)
-myapp.ListenKeyEvent('keydown','f',findquiz)
-myapp.ListenKeyEvent('click','c',facts)
+myapp.ListenKeyEvent('keydown','c', capitalquiz)
+# myapp.ListenKeyEvent('keydown','f',findquiz)
+# myapp.ListenKeyEvent('click','c',facts)
