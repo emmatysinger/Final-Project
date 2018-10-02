@@ -11,15 +11,16 @@ MAP = ImageAsset("images/US_map.png")
 Sprite(MAP)
 
 capital = False
-states = {'Alabama':0, 'Alaska':1, 'Arizona':2, 'Arkansas':3, 'California':4, 'Colorado':5, 'Connecticut':6, 'Delaware':7, 'Florida':8, 'Georgia':9, 'Hawaii':10, 'Idaho':11, 'Inidian':13, 'Iowa':14, 'Kansas':15, 'Kentucky':16, 'Lousiana':17, 'Maine':18, 'Maryland':19, 'Massachusetts':20, 'Michigan':12, 'Minnesota':22, 'Mississippi':23, 'Missouri':24, 'Montana':25, 'Nebraska':26, 'Nevada':27, 'New Hampshire':28, 'New Jersey':29, 'New Mexico':30, 'New York':31, 'North Carolina':32, 'North Dakota':33, 'Ohio':34, 'Oklahoma':35, 'Oregon':36, 'Pennsylvania':37, 'Rhode Island':38, 'South Carolina':39, 'South Dakota':40, 'Tennessee':41, 'Texas':42, 'Utah':43, 'Vermont':44, 'Virginia':45, 'Washington':46, 'West Virginia':47, 'Wisconsin':48, 'Wyoming':49}
-capitals = ["Montegomery", "Juneau", "Phoenix", "Little Rock", "Sacramento", "Denver", "Hartford", "Dover", "Tallahassee", "Atlanta", "Honolulu", "Boise", "Springfield", "Indianapolis", "Des Moines", "Topeka", "Frankfort", "Baton Rouge", "Augusta", "Annapolis", "Boston", "Lansing", "St. Paul", "Jackson", "Jeffereson City", "Helena", "Lincoln", "Carson City", "Concord", "Trenton", "Santa Fe", "Albany", "Raleigh", "Bismarck", "Columbus", "Oklahoma City", "Salem", "Harrisburg", "Providence", "Columbia", "Pierre", "Nashville", "Austin", "Salt Lake City", "Montpelier", "Richmond", "Olympia", "Charleston", "Madison", "Cheyenne"]
+states=['Alabama':("Montegomery"), 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Lousiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'}
+states_facts = {'Alabama':("Montegomery"), 'Alaska':("Juneau"), 'Arizona':("Phoenix"), 'Arkansas':("Little Rock"), 'California':("Sacramento"), 'Colorado':( "Denver"), 'Connecticut':("Hartford"), 'Delaware':("Dover"), 'Florida':("Tallahassee"), 'Georgia':("Atlanta"), 'Hawaii':("Honolulu"), 'Idaho':("Boise"), 'Illnois':("Springfield"), 'Indiana':("Indianapolis"), 'Iowa':("Des Moines"), 'Kansas':("Topeka"), 'Kentucky':("Frankfort"), 'Lousiana':("Baton Rouge"), 'Maine':("Augusta"), 'Maryland':19, 'Massachusetts':20, 'Michigan':("Lansing"), 'Minnesota':("St. Paul"), 'Mississippi':("Jackson"), 'Missouri':("Jefferson City"), 'Montana':("Helena), 'Nebraska':("Lincoln"), 'Nevada':("Carson City"), 'New Hampshire':("Concord"), 'New Jersey':("Trenton"), 'New Mexico':("Santa Fe"), 'New York':("Albany"), 'North Carolina':("Raleigh"), 'North Dakota':("Bismarck"), 'Ohio':("Columbus"), 'Oklahoma':("Oklahoma City"), 'Oregon':("Salem"), 'Pennsylvania':("Harrisburg"), 'Rhode Island':("Providence"), 'South Carolina':("Columbia"), 'South Dakota':("Pierre"), 'Tennessee':("Nashville"), 'Texas':("Austin"), 'Utah':("Salt Lake City"), 'Vermont':("Montpelier"), 'Virginia':("Richmond"), 'Washington':("Olympia"), 'West Virginia':("Charleston"), 'Wisconsin':("Madison"), 'Wyoming':("Cheyenne")}
+ 
         
 def capitalquiz(event):
-    global capital, states, capitals
+    global capital, states, states_facts
     capital = not capital
     if capital == True:
         n = random.randint(0, 50)
-        print(n)
+        print(states{n})
         # answer = input("What is the capital of" + n + "? ")
         # if answer == capitals[n]:
         #     print ("CORRECT!")
