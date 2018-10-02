@@ -3,7 +3,7 @@
 
 #INTERACTIVE MAP
 from ggame import *
-import randint
+import random
 myapp = App()
 
 MAP = ImageAsset("images/US_map.png")
@@ -18,7 +18,7 @@ def capitalquiz(event):
     global capital, states, capitals
     capital = not capital
     while capital == TRUE:
-        n = randint
+        n = random.randint(0, 51)
         answer = input("What is the capital of" + n + "? ")
         if answer == capitals[n]:
             print ("CORRECT!")
