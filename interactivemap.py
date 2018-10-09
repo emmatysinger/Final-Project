@@ -9,12 +9,12 @@ myapp = App()
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
 Map=Sprite(MAP,(20,20))
 Map.scale = .44
-coordinates = []
+coordinates = [(740,480), (135,560), (225,415), (610,425), (85,335), (360,320), (965,200), (990,290), (865,573), (805,465), (370,645), (210,170), (670,295), (725,290), (585,245), (495,335), (765,335), (610,505), (1010,100), (905,280), (985,180), (740,205), (565,135), (675,475), (610,340), (310,105), (470,255), (145,260), (975,155), (940,260), (335,425), (910,175), (890,375), (465,110), (790,275), (515,415), (610,425), (85,335), (360,320), (965,200), (990,290)]
 
 white = Color(0xfffafa, 1)
 black = Color(0x000000, 1)
 line = LineStyle(1, black)
-dot = CircleAsset(10, line, white)
+dot = CircleAsset(8, line, white)
 
 
 #---------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ states_facts = {'Alabama':["Montegomery"], 'Alaska':["Juneau"], 'Arizona':["Phoe
 #      coordinates.append((coordinates_list[0], coordinates_list[1]))
 
 for s in coordinates:
-    x,y = coordinates[s]
+    x,y = s
     Sprite(dot, (x, y))
 
      
@@ -56,9 +56,10 @@ def findquiz(event):
 def facts(event):
     global stateQ, capitalQ, states_location, states_facts
     #while stateQ == False and capitalQ == False:
+    print((event.x//5)*5,(event.y//5)*5)
 
     
 myapp.run()
 myapp.listenKeyEvent('keydown','c', capitalquiz)
 myapp.listenKeyEvent('keydown','f',findquiz)
-myapp.listenKeyEvent('click','c',facts)
+myapp.listenMouseEvent('click',facts)
