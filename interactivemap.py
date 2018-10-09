@@ -15,7 +15,8 @@ white = Color(0xfffafa, 1)
 black = Color(0x000000, 1)
 line = LineStyle(1, black)
 dot = CircleAsset(8, line, white)
-d_state = 0
+state_int = -1
+state = 0
 
 for s in coordinates:
     x,y = s
@@ -28,17 +29,15 @@ states=['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'C
 states_facts = {'Alabama':["Montegomery"], 'Alaska':["Juneau"], 'Arizona':["Phoenix"], 'Arkansas':["Little Rock"], 'California':["Sacramento"], 'Colorado':[ "Denver"], 'Connecticut':["Hartford"], 'Delaware':["Dover"], 'Florida':["Tallahassee"], 'Georgia':["Atlanta"], 'Hawaii':["Honolulu"], 'Idaho':["Boise"], 'Illnois':["Springfield"], 'Indiana':["Indianapolis"], 'Iowa':["Des Moines"], 'Kansas':["Topeka"], 'Kentucky':["Frankfort"], 'Lousiana':["Baton Rouge"], 'Maine':["Augusta"], 'Maryland':["Annapolis"], 'Massachusetts':["Boston"], 'Michigan':["Lansing"], 'Minnesota':["St. Paul"], 'Mississippi':["Jackson"], 'Missouri':["Jefferson City"], 'Montana':["Helena"], 'Nebraska':["Lincoln"], 'Nevada':["Carson City"], 'New Hampshire':["Concord"], 'New Jersey':["Trenton"], 'New Mexico':["Santa Fe"], 'New York':["Albany"], 'North Carolina':["Raleigh"], 'North Dakota':["Bismarck"], 'Ohio':["Columbus"], 'Oklahoma':["Oklahoma City"], 'Oregon':["Salem"], 'Pennsylvania':["Harrisburg"], 'Rhode Island':["Providence"], 'South Carolina':["Columbia"], 'South Dakota':["Pierre"], 'Tennessee':["Nashville"], 'Texas':["Austin"], 'Utah':["Salt Lake City"], 'Vermont':["Montpelier"], 'Virginia':["Richmond"], 'Washington':["Olympia"], 'West Virginia':["Charleston"], 'Wisconsin':["Madison"], 'Wyoming':["Cheyenne"]}
 
 def determinestate(x,y):
-    global d_state, coordinates
+    global state_int, coordinates, state, states
     for s in range(len(coordinates)):
         z = False
+        state = 0
         m,n = coordinates[s]
         if abs(int(x)-m) <= 8 and abs(int(y)-n) <= 8:
             z = True
             d_state = s
-
-determinestate(615,432)
-print(d_state)
-   
+            state = states[s]
 
 def capitalquiz(event):
     global capitalQ, states, states_facts
@@ -55,15 +54,24 @@ def capitalquiz(event):
     
 
 def findquiz(event):
-    global stateQ, states, states_location
+    global stateQ, states
     stateQ = not stateQ
-    if state == True:
+    if stateQ == True:
         state = random.choice(states)
 
 def facts(event):
-    global stateQ, capitalQ, states_location, states_facts
-    #while stateQ == False and capitalQ == False:
-    print((event.x//5)*5,(event.y//5)*5)
+    global stateQ, capitalQ, states_facts, determinestate
+    while stateQ == False and capitalQ == False:
+        determinestate(event.x,event.y)
+        if state == 0:
+            print("Please try again")
+        else:
+            facts = states_facts[state]
+            print("""
+            WELCOME TO {0}!
+            Capital: {1}
+            Population: 
+            """.format(state, facts[0])
 
     
 myapp.run()
