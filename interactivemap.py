@@ -34,10 +34,11 @@ def determinestate(x,y):
         z = False
         state = 0
         m,n = coordinates[s]
-        if abs(int(x)-m) <= 8 and abs(int(y)-n) <= 8:
+        if abs(int(x)-m) <= 16 and abs(int(y)-n) <=16:
             z = True
             d_state = s
             state = states[s]
+            break
 
 def capitalquiz(event):
     global capitalQ, states, states_facts
@@ -61,17 +62,18 @@ def findquiz(event):
 
 def facts(event):
     global stateQ, capitalQ, states_facts, determinestate
-    while stateQ == False and capitalQ == False:
+    if stateQ == False and capitalQ == False:
         determinestate(event.x,event.y)
-        if state == 0:
-            print("Please try again")
-        else:
-            facts = states_facts[state]
-            print("""
-            WELCOME TO {0}!
-            Capital: {1}
-            Population: 
-            """.format(state, facts[0])
+        print(state)
+        # if state == 0:
+        #     print("Please try again")
+        # else:
+        #     facts = states_facts[state]
+        #     print("""
+        #     WELCOME TO {0}!
+        #     Capital: {1}
+        #     Population: 
+        #     """.format(state, facts[0])
 
     
 myapp.run()
