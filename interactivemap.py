@@ -6,7 +6,8 @@ from ggame import *
 import random
 import time
 import browser
-from threading import Event
+import threading
+
 myapp = App()
 
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
@@ -29,7 +30,8 @@ for s in coordinates:
 capitalQ = False
 stateQ = False
 ready = False
-go = Event()
+go = threading.Event()
+
 states=['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Lousiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
 states_facts = {'Alabama':["Montegomery"], 'Alaska':["Juneau"], 'Arizona':["Phoenix"], 'Arkansas':["Little Rock"], 'California':["Sacramento"], 'Colorado':[ "Denver"], 'Connecticut':["Hartford"], 'Delaware':["Dover"], 'Florida':["Tallahassee"], 'Georgia':["Atlanta"], 'Hawaii':["Honolulu"], 'Idaho':["Boise"], 'Illnois':["Springfield"], 'Indiana':["Indianapolis"], 'Iowa':["Des Moines"], 'Kansas':["Topeka"], 'Kentucky':["Frankfort"], 'Lousiana':["Baton Rouge"], 'Maine':["Augusta"], 'Maryland':["Annapolis"], 'Massachusetts':["Boston"], 'Michigan':["Lansing"], 'Minnesota':["St. Paul"], 'Mississippi':["Jackson"], 'Missouri':["Jefferson City"], 'Montana':["Helena"], 'Nebraska':["Lincoln"], 'Nevada':["Carson City"], 'New Hampshire':["Concord"], 'New Jersey':["Trenton"], 'New Mexico':["Santa Fe"], 'New York':["Albany"], 'North Carolina':["Raleigh"], 'North Dakota':["Bismarck"], 'Ohio':["Columbus"], 'Oklahoma':["Oklahoma City"], 'Oregon':["Salem"], 'Pennsylvania':["Harrisburg"], 'Rhode Island':["Providence"], 'South Carolina':["Columbia"], 'South Dakota':["Pierre"], 'Tennessee':["Nashville"], 'Texas':["Austin"], 'Utah':["Salt Lake City"], 'Vermont':["Montpelier"], 'Virginia':["Richmond"], 'Washington':["Olympia"], 'West Virginia':["Charleston"], 'Wisconsin':["Madison"], 'Wyoming':["Cheyenne"]}
 
@@ -60,16 +62,16 @@ def capitalquiz(event):
             print ("Incorrect, the capital of {0} is {1}!".format(state, correct_answer))
     
 
-def findquiz(event, go=None):
+def findquiz(event):
     global stateQ, states, state, ready, go
     stateQ = not stateQ
     ready = False
     if stateQ == True:
         r_state = random.choice(states)
         print("Where is {0}?".format(r_state))
-        go.wait()
         # while not ready:
         #     browser.timer(1)
+        go.wait()
         if r_state == state:
             print("CORRECT!")
         else:
@@ -93,7 +95,7 @@ Population:
     
     elif stateQ == True:
         determinestate(event.x,event.y)
-        go = go
+        go.set()
 
 
     
