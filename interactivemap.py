@@ -6,7 +6,7 @@ from ggame import *
 import random
 import time
 import browser
-import threading
+from threading import Event
 myapp = App()
 
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
