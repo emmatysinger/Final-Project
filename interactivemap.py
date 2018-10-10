@@ -66,6 +66,7 @@ def findquiz(event, go=None):
     ready = False
     if stateQ == True:
         r_state = random.choice(states)
+        print("Where is {0}?".format(r_state))
         go.wait()
         # while not ready:
         #     browser.timer(1)
