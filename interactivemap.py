@@ -4,6 +4,7 @@
 #INTERACTIVE MAP
 from ggame import *
 import random
+import time
 myapp = App()
 
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
@@ -62,8 +63,8 @@ def findquiz(event):
     ready = False
     if stateQ == True:
         r_state = random.choice(states)
-        while ready == False:
-            
+        while not ready:
+            time.sleep(1)
         if r_state == state:
             print("CORRECT!")
         else:
