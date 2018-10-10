@@ -4,8 +4,8 @@
 #INTERACTIVE MAP
 from ggame import *
 import random
-import time
-import browser
+# import time
+# import browser
 
 myapp = App()
 
