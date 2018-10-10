@@ -53,18 +53,18 @@ def capitalquiz(event):
     if capitalQ == True:
         r_state = random.choice(states)
         answer = input("What is the capital of " + r_state + "? ")
-        correct_answer = states_facts[state]
+        correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
             print ("CORRECT!")
         else:
-            print ("Incorrect, the capital of {0} is {1}!".format(state, correct_answer))
+            print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
     
 
 def findquiz(event):
     global stateQ, states, state, ready, go, r_state
     stateQ = not stateQ
-    ready = False
+    #ready = False
     if stateQ == True:
         r_state = random.choice(states)
         print("Where is {0}?".format(r_state))
@@ -74,9 +74,9 @@ def findquiz(event):
 
 def facts(event):
     global stateQ, capitalQ, states_facts, determinestate, ready, r_state
-    ready = True
+    #ready = True
+    determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
-        determinestate(event.x,event.y)
         if state == 0:
             print("Please try again")
         else:
@@ -88,11 +88,10 @@ Population:
 """.format(state, facts[0]))
     
     elif stateQ == True:
-        determinestate(event.x,event.y)
         if r_state == state:
             print("CORRECT!")
         else:
-            print("Incorrect")
+            print("Sorry, that is {0}".format(state))
 
 
     
