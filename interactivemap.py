@@ -65,15 +65,15 @@ def facts(event):
     if stateQ == False and capitalQ == False:
         determinestate(event.x,event.y)
         print(state)
-        # if state == 0:
-        #     print("Please try again")
-        # else:
-        #     facts = states_facts[state]
-        #     print("""
-        #     WELCOME TO {0}!
-        #     Capital: {1}
-        #     Population: 
-        #     """.format(state, facts[0])
+        if state == 0:
+            print("Please try again")
+        else:
+            facts = states_facts[state]
+            print("""
+            WELCOME TO {0}!
+            Capital: {1}
+            Population: 
+            """.format(state, facts[0])
 
     
 myapp.run()
