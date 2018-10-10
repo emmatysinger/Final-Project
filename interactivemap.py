@@ -6,7 +6,6 @@ from ggame import *
 import random
 import time
 import browser
-import threading
 
 myapp = App()
 
