@@ -5,6 +5,7 @@
 from ggame import *
 import random
 import time
+import browser
 myapp = App()
 
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
@@ -64,7 +65,7 @@ def findquiz(event):
     if stateQ == True:
         r_state = random.choice(states)
         while not ready:
-            time.sleep(1)
+            browser.timer(1)
         if r_state == state:
             print("CORRECT!")
         else:
