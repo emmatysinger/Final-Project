@@ -40,12 +40,13 @@ def determinestate(x,y):
             state = states[s]
             break
 
+
 def capitalquiz(event):
     global capitalQ, states, states_facts
     capitalQ = not capitalQ
     if capitalQ == True:
-        state = random.choice(states)
-        answer = input("What is the capital of " + state + "? ")
+        r_state = random.choice(states)
+        answer = input("What is the capital of " + r_state + "? ")
         correct_answer = states_facts[state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
@@ -55,25 +56,32 @@ def capitalquiz(event):
     
 
 def findquiz(event):
-    global stateQ, states
+    global stateQ, states, state
     stateQ = not stateQ
     if stateQ == True:
-        state = random.choice(states)
+        r_state = random.choice(states)
+        if r_state == state:
+            print("CORRECT!")
+        else:
+            print("Incorrect")
+        
 
 def facts(event):
     global stateQ, capitalQ, states_facts, determinestate
     if stateQ == False and capitalQ == False:
         determinestate(event.x,event.y)
-        print(state)
         if state == 0:
             print("Please try again")
         else:
             facts = states_facts[state]
             print("""
-            WELCOME TO {0}!
-            Capital: {1}
-            Population: 
-            """.format(state, facts[0])
+WELCOME TO {0}!
+Capital: {1}
+Population: 
+""".format(state, facts[0]))
+    
+    elif stateQ == True:
+        determinestate(event.x,event.y)
 
     
 myapp.run()
