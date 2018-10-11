@@ -17,6 +17,7 @@ line = LineStyle(1, black)
 dot = CircleAsset(8, line, white)
 state_int = -1
 state = 0
+r_state = 0
 
 for s in coordinates:
     x,y = s
@@ -43,7 +44,7 @@ def determinestate(x,y):
             break
 
 def findquiz(event):
-    global stateQ, states, state, ready, go
+    global stateQ, states, state, ready, go, r_state
     stateQ = not stateQ
     ready = False
     if stateQ == True:
@@ -59,7 +60,7 @@ def findquiz(event):
         
 
 def facts(event):
-    global stateQ, capitalQ,  determinestate, ready, go
+    global stateQ, capitalQ,  determinestate, ready, go, r_state
     ready = True
     determinestate(event.x,event.y)
     # go.set()
