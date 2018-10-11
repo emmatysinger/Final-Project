@@ -1,8 +1,8 @@
 from ggame import *
 import random
-import time
-import browser
-import threading
+# import time
+# import browser
+# import threading
 
 myapp = App()
 
@@ -26,7 +26,7 @@ for s in coordinates:
 capitalQ = False
 stateQ = False
 ready = False
-go = threading.Event()
+# go = threading.Event()
 
 states=['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Lousiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
 
@@ -49,23 +49,24 @@ def findquiz(event):
     if stateQ == True:
         r_state = random.choice(states)
         print("Where is {0}?".format(r_state))
-        while not ready:
-            if ready == True:
-                 break
-            else:
-                continue
-        go.wait()
-        if r_state == state:
-            print("CORRECT!")
-        else:
-            print("Incorrect")
+        # while not ready:
+        #     if ready == True:
+        #          break
+        #     else:
+        #         continue
+        # go.wait()
+        
         
 
 def facts(event):
     global stateQ, capitalQ,  determinestate, ready, go
     ready = True
     determinestate(event.x,event.y)
-    go.set()
+    # go.set()
+    if r_state == state:
+        print("CORRECT!")
+    else:
+        print("Sorry , that is {0}".format(state))
 
 
     
