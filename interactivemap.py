@@ -46,12 +46,17 @@ def determinestate(x,y):
             state = states[s]
             break
 
+def ask():
+    global r_state, stateQ, capitalQ
+    r_state = random.choice(states)
+    if stateQ == True:
+        print("Where is {0}?".format(r_state))
 
 def capitalquiz(event):
-    global capitalQ, states, states_facts
+    global capitalQ, states, states_facts, r_state, ask
     capitalQ = not capitalQ
     if capitalQ == True:
-        r_state = random.choice(states)
+        ask()
         answer = input("What is the capital of " + r_state + "? ")
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
@@ -61,19 +66,14 @@ def capitalquiz(event):
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
     
 
-def findquiz(event):
-    global stateQ, states, state, ready, go, r_state
+def findquiz(event):             #starts/stops find the state quiz
+    global stateQ, r_state, ask
     stateQ = not stateQ
-    #ready = False
-    if stateQ == True:
-        r_state = random.choice(states)
-        print("Where is {0}?".format(r_state))
-        # while not ready:
-        #     browser.timer(1)
+    ask()
         
 
 def facts(event):
-    global stateQ, capitalQ, states_facts, determinestate, ready, r_state
+    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask
     #ready = True
     determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
@@ -90,8 +90,9 @@ Population:
     elif stateQ == True:
         if r_state == state:
             print("CORRECT!")
+            ask()
         else:
-            print("Sorry, that is {0}".format(state))
+            print("Sorry that is {0}, please try again".format(state))
 
 
     
