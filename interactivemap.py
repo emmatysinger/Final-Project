@@ -44,16 +44,11 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state, stateQ, capitalQ
+    global r_state
     r_state = random.choice(states)
     if stateQ == True:
         print("Where is {0}?".format(r_state))
-
-def capitalquiz(event):
-    global capitalQ, states, states_facts, r_state, ask
-    capitalQ = not capitalQ
     if capitalQ == True:
-        ask()
         answer = input("What is the capital of " + r_state + "? ")
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
@@ -61,10 +56,24 @@ def capitalquiz(event):
             print ("CORRECT!")
         else:
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
+
+def capitalquiz(event):
+    global capitalQ
+    capitalQ = not capitalQ
+    print(capitalQ)
+    if capitalQ == True:
+        print("You are playing capital quiz")
+    else:
+        print("The capital quiz has ended")
+    ask()
+    
+
+def capitalQ(event):
+    ask()
     
 
 def findstate(event):             #starts/stops find the state quiz
-    global stateQ, r_state, ask
+    global stateQ
     stateQ = not stateQ
     if stateQ == True:
         print("You are playing 'Find the State'")
@@ -75,7 +84,6 @@ def findstate(event):             #starts/stops find the state quiz
 
 def facts(event):
     global stateQ, capitalQ, states_facts, determinestate,  r_state, ask
-    #ready = True
     determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
         if state == 0:
@@ -103,3 +111,4 @@ myapp.run()
 myapp.listenKeyEvent('keydown','c', capitalquiz)
 myapp.listenKeyEvent('keydown','f',findstate)
 myapp.listenMouseEvent('click',facts)
+myapp.listenKeyEvent('keydown','space', capitalQ)
