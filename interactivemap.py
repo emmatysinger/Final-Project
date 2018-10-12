@@ -36,11 +36,9 @@ states_facts = {'Alabama':["Montegomery"], 'Alaska':["Juneau"], 'Arizona':["Phoe
 def determinestate(x,y):
     global state_int, coordinates, state, states
     for s in range(len(coordinates)):
-        z = False
         state = 0
         m,n = coordinates[s]
         if abs(int(x)-m) <= 16 and abs(int(y)-n) <=16:
-            z = True
             d_state = s
             state = states[s]
             break
@@ -65,7 +63,7 @@ def capitalquiz(event):
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
     
 
-def findquiz(event):             #starts/stops find the state quiz
+def findstate(event):             #starts/stops find the state quiz
     global stateQ, r_state, ask
     stateQ = not stateQ
     if stateQ == True:
@@ -95,11 +93,13 @@ Population:
             print("CORRECT!")
             ask()
         else:
-            print("Sorry that is {0}, please try again".format(state))
+            if state ==0:
+                print("Please click on the white dot")
+            else:
+                print("Sorry that is {0}, please try again".format(state))
 
 
-    
 myapp.run()
 myapp.listenKeyEvent('keydown','c', capitalquiz)
-myapp.listenKeyEvent('keydown','f',findquiz)
+myapp.listenKeyEvent('keydown','f',findstate)
 myapp.listenMouseEvent('click',facts)
