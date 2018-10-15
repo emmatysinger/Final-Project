@@ -96,8 +96,8 @@ def facts(event):
             print("""
 WELCOME TO {0}!
 Capital: {1}
-Population: 
-""".format(state, facts[0]))
+Population: {2}
+""".format(state, facts[0], facts[1]))
     
     elif stateQ == True:
         if r_state == state:
