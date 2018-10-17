@@ -9,10 +9,24 @@ import random
 
 myapp = App()
 
+
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
 Map=Sprite(MAP,(20,20))
-Map.scale = .44
-coordinates = [(740,480), (135,560), (225,415), (610,425), (85,335), (360,320), (965,200), (990,290), (865,573), (805,465), (370,645), (210,170), (670,295), (725,290), (585,245), (495,335), (765,335), (610,505), (1010,100), (905,280), (985,180), (740,205), (565,135), (675,475), (610,340), (310,105), (470,255), (145,260), (975,155), (940,260), (335,425), (910,175), (890,375), (465,110), (790,275), (515,405), (100,145), (875,240), (1015,240), (850,420), (460,180), (740,390), (475,500), (240,295), (950,135), (885,320), (130,60), (825,315), (645,170), (330,205)] 
+
+width=myapp.width
+height=myapp.height
+mp_w = Map.width
+mp_h = Map.height
+if width/mp_w < height/mp_h:
+    Map.scale = (width-20)/mp_w
+else:
+    Map.scale = (height-20)/mp_h
+    
+coordinates = []
+coordinates_i = [(740,480), (135,560), (225,415), (610,425), (85,335), (360,320), (965,200), (990,290), (865,573), (805,465), (370,645), (210,170), (670,295), (725,290), (585,245), (495,335), (765,335), (610,505), (1010,100), (905,280), (985,180), (740,205), (565,135), (675,475), (610,340), (310,105), (470,255), (145,260), (975,155), (940,260), (335,425), (910,175), (890,375), (465,110), (790,275), (515,405), (100,145), (875,240), (1015,240), (850,420), (460,180), (740,390), (475,500), (240,295), (950,135), (885,320), (130,60), (825,315), (645,170), (330,205)] 
+for s in coordinates_i:
+    x,y = s
+    coordinates.append((x/.44*Map.scale,y/.44*Map.scale))
 
 white = Color(0xfffafa, 1)
 black = Color(0x000000, 1)
@@ -27,8 +41,7 @@ for s in coordinates:
     Sprite(dot, (x, y))
 
 instructions = TextAsset("click 'f' to start the find the state game")
-#instructions.style = 20pt Helvetica
-Sprite(instructions, (900,900))
+Sprite(instructions, (600,600))
 
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
@@ -70,11 +83,9 @@ def capitalquiz(event):
         print("The capital quiz has ended")
     ask()
     
-
 def capitalQuiz(event):
     ask()
     
-
 def findstate(event):           
     global stateQ
     stateQ = not stateQ
@@ -83,7 +94,6 @@ def findstate(event):
     else:
         print("'Find the State' game has ended")
     ask()
-        
 
 def facts(event):
     global stateQ, capitalQ, states_facts, determinestate,  r_state, ask
