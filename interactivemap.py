@@ -33,7 +33,8 @@ for s in coordinates_i:
 white = Color(0xfffafa, 1)
 black = Color(0x000000, 1)
 line = LineStyle(1, black)
-dot = CircleAsset(8, line, white)
+dot_size = 8/.44*Map.scale
+dot = CircleAsset(dot_size, line, white)
 state_int = -1
 state = 0
 r_state = 0
@@ -57,7 +58,7 @@ def determinestate(x,y):
     for s in range(len(coordinates)):
         state = 0
         m,n = coordinates[s]
-        if abs(int(x)-m) <= 16 and abs(int(y)-n) <=16:
+        if abs(int(x)-m) <= dot_size*2 and abs(int(y)-n) <= dot_size*2:
             d_state = s
             state = states[s]
             break
