@@ -17,10 +17,10 @@ width=myapp.width
 height=myapp.height
 mp_w = Map.width
 mp_h = Map.height
-if width/mp_w < height/mp_h:
+if width/mp_w < 0.8*height/mp_h:
     Map.scale = (width-20)/mp_w
 else:
-    Map.scale = (height-20)/mp_h
+    Map.scale = (0.8*height-20)/mp_h
 
 coordinates = []
 coordinates_i = [(740,480), (135,560), (225,415), (610,425), (85,335), (360,320), (965,200), (990,290), (865,573), (805,465), (370,645), (210,170), (670,295), (725,290), (585,245), (495,335), (765,335), (610,505), (1010,100), (905,280), (985,180), (740,205), (565,135), (675,475), (610,340), (310,105), (470,255), (145,260), (975,155), (940,260), (335,425), (910,175), (890,375), (465,110), (790,275), (515,405), (100,145), (875,240), (1015,240), (850,420), (460,180), (740,390), (475,500), (240,295), (950,135), (885,320), (130,60), (825,315), (645,170), (330,205)] 
@@ -41,8 +41,10 @@ for s in coordinates:
     x,y = s
     Sprite(dot, (x, y))
 
-instructions = TextAsset("click 'f' to start the find the state game")
-Sprite(instructions, (600,600))
+findstate_i = TextAsset("Press 'f' to play Find the State", style ='12pt Helvetica', width = 150)
+capitalQ_i = TextAsset("Press 'c' to play the Capital Quiz", style ='12pt Helvetica', width = 150)
+Sprite(findstate_i, (0.01*width,0.94*height))
+Sprite(capitalQ_i, (0.01*width+175,0.94*height))
 
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
