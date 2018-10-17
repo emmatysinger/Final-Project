@@ -106,11 +106,13 @@ def facts(event):
             print("Please try again")
         else:
             facts = states_facts[state]
-            print("""
+            facts = """
 WELCOME TO {0}!
 Capital: {1}
 Population: {2}
-""".format(state, facts[0], facts[1]))
+""".format(state, facts[0], facts[1])
+            fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width)
+            Sprite(fact, (0.75*width, 0.85*height))
     
     elif stateQ == True:
         if r_state == state:
