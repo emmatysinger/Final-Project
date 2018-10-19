@@ -107,6 +107,7 @@ def findstate(event):
     i.visible = False
     if stateQ == True:
         print("You are playing 'Find the State'")
+        print("To quit the game press 'f' again")
         F.visible = False
         C.visible = False
     else:
