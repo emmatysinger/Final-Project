@@ -117,7 +117,8 @@ WELCOME TO {0}!
 Capital: {1}
 Population: {2}
 """.format(state, facts[0], facts[1])
-            fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width)
+            fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width-15)
+            Box = RectangleAsset(0.25*width + 5, i.height + 20
             i = Sprite(fact, (0.75*width, 0.85*height))
             box = Sprite(Box, (0.75*width - 10, 0.85*height - 10))
     
