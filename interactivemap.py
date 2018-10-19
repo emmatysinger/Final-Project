@@ -40,6 +40,7 @@ state_int = -1
 state = 0
 r_state = 0
 i = Sprite(blank, (width,height))
+box = Sprite(blank, (width,height))
 
 for s in coordinates:
     x,y = s
@@ -47,8 +48,8 @@ for s in coordinates:
 
 findstate_i = TextAsset("Press 'f' to play Find the State", style ='12pt Helvetica', width = 150)
 capitalQ_i = TextAsset("Press 'c' to play the Capital Quiz", style ='12pt Helvetica', width = 150)
-Sprite(findstate_i, (0.01*width,0.94*height))
-Sprite(capitalQ_i, (0.01*width+175,0.94*height))
+F = Sprite(findstate_i, (0.01*width,0.94*height))
+C = Sprite(capitalQ_i, (0.01*width+175,0.94*height))
 
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
@@ -90,8 +91,12 @@ def capitalquiz(event):
         print("You are playing capital quiz")
         print("For a new question press the spacebar")
         print("To quit the game press 'c' again")
+        F.visible = False
+        C.visible = False
     else:
         print("The capital quiz has ended")
+        F.visible = True
+        C.visible = True
     
 def capitalQuiz(event):
     ask()
@@ -102,18 +107,23 @@ def findstate(event):
     i.visible = False
     if stateQ == True:
         print("You are playing 'Find the State'")
+        F.visible = False
+        C.visible = False
     else:
         print("'Find the State' game has ended")
+        F.visible = True
+        C.visible = True
     ask()
 
 def facts(event):
-    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i
+    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box
     determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
         if state == 0:
             print("Please try again")
         else:
             i.visible = False
+            box.visible = False
             facts = states_facts[state]
             facts = """
 WELCOME TO {0}!
