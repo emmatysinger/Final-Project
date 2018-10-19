@@ -30,6 +30,7 @@ for s in coordinates_i:
 
 white = Color(0xfffafa, 1)
 black = Color(0x000000, 1)
+Medium_Aquamarine = Color(0x66cdaa, 1)
 line = LineStyle(1, black)
 no_line = LineStyle(1, white)
 dot_size = 8/.44*Map.scale
@@ -118,9 +119,9 @@ Capital: {1}
 Population: {2}
 """.format(state, facts[0], facts[1])
             fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width-15)
-            Box = RectangleAsset(0.25*width + 5, i.height + 20
+            Box = RectangleAsset(0.25*width - 10, fact.height, line, Medium_Aquamarine)
+            box = Sprite(Box, (0.75*width - 10, 0.85*height))
             i = Sprite(fact, (0.75*width, 0.85*height))
-            box = Sprite(Box, (0.75*width - 10, 0.85*height - 10))
     
     elif stateQ == True:
         if r_state == state:
