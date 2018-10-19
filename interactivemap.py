@@ -81,8 +81,9 @@ def ask():
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
 
 def capitalquiz(event):
-    global capitalQ
+    global capitalQ, i
     capitalQ = not capitalQ
+    i.visible = False
     if capitalQ == True:
         print("You are playing capital quiz")
     else:
@@ -93,8 +94,9 @@ def capitalQuiz(event):
     ask()
     
 def findstate(event):           
-    global stateQ
+    global stateQ, i
     stateQ = not stateQ
+    i.visible = False
     if stateQ == True:
         print("You are playing 'Find the State'")
     else:
@@ -117,6 +119,7 @@ Population: {2}
 """.format(state, facts[0], facts[1])
             fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width)
             i = Sprite(fact, (0.75*width, 0.85*height))
+            box = Sprite(Box, (0.75*width - 10, 0.85*height - 10))
     
     elif stateQ == True:
         if r_state == state:
