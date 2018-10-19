@@ -85,11 +85,13 @@ def capitalquiz(event):
     global capitalQ, i
     capitalQ = not capitalQ
     i.visible = False
+    box.visible = False
     if capitalQ == True:
         print("You are playing capital quiz")
+        print("For a new question press the spacebar")
+        print("To quit the game press 'c' again")
     else:
         print("The capital quiz has ended")
-    ask()
     
 def capitalQuiz(event):
     ask()
