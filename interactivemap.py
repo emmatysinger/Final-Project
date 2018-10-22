@@ -4,8 +4,6 @@
 #INTERACTIVE MAP
 from ggame import *
 import random
-# import time
-# import browser
 
 myapp = App()
 
@@ -74,7 +72,25 @@ def ask():
     if stateQ == True:
         print("Where is {0}?".format(r_state))
     if capitalQ == True:
-        answer = input("What is the capital of " + r_state + "? ")
+        answer = input("""What is the capital of {0}? 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        """.format(r_state))
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
@@ -105,6 +121,7 @@ def findstate(event):
     global stateQ, i
     stateQ = not stateQ
     i.visible = False
+    box.visible = False
     if stateQ == True:
         print("You are playing 'Find the State'")
         print("To quit the game press 'f' again")
