@@ -52,7 +52,7 @@ C = Sprite(capitalQ_i, (0.01*width+175,0.94*height))
 #---------------------------------------------------------------------------------------------------------------
 class Counter(Sprite):
     def __init__(self, count):
-        super().__init__(count)
+        super().__init__()
         text = TextAsset(text = count, style = '70pt')
         Sprite(text, (0.98*width, 0.01*height))
 #---------------------------------------------------------------------------------------------------------------
@@ -129,11 +129,13 @@ def capitalQuiz(event):
     ask()
     
 def findstate(event):           
-    global stateQ, i
+    global stateQ, i, c
     stateQ = not stateQ
     i.visible = False
     box.visible = False
     if stateQ == True:
+        c = 0
+        Counter(0)
         print("You are playing 'Find the State'")
         print("To quit the game press 'f' again")
         F.visible = False
@@ -167,6 +169,8 @@ Population: {2}
     elif stateQ == True:
         if r_state == state:
             print("CORRECT!")
+            c += 1
+            count = Counter(c)
             ask()
         else:
             if state ==0:
