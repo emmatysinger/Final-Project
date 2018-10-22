@@ -50,6 +50,12 @@ F = Sprite(findstate_i, (0.01*width,0.94*height))
 C = Sprite(capitalQ_i, (0.01*width+175,0.94*height))
 
 #---------------------------------------------------------------------------------------------------------------
+class Counter(Sprite):
+    def __init__(self, count):
+        super().__init__(count)
+        text = TextAsset(text = count, style = '70pt')
+        Sprite(text, (0.98*width, 0.01*height))
+#---------------------------------------------------------------------------------------------------------------
 capitalQ = False
 stateQ = False
 
@@ -95,7 +101,7 @@ def ask():
         
         
         
-""".format(r_state))
+        """.format(r_state))
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
