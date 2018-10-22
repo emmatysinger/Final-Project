@@ -79,6 +79,8 @@ def ask():
         
         
         
+         
+         
         
         
         
@@ -90,7 +92,10 @@ def ask():
         
         
         
-        """.format(r_state))
+        
+        
+        
+""".format(r_state))
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
