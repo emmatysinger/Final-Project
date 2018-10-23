@@ -37,6 +37,7 @@ blank = CircleAsset(1, no_line, white)
 state_int = -1
 state = 0
 r_state = 0
+count = Sprite(blank, (width,height))
 i = Sprite(blank, (width,height))
 box = Sprite(blank, (width,height))
 
@@ -52,16 +53,24 @@ C = Sprite(capitalQ_i, (0.01*width+175,0.94*height))
 #---------------------------------------------------------------------------------------------------------------
 class Counter(Sprite):
     def __init__(self, count):
-        super().__init__()
-        texto = TextAsset(text = count, style = '70pt')
-        Sprite(texto, (0.98*width, 0.01*height))
+        texto = TextAsset(text = str(count), style = '40pt Helvetica')
+        super().__init__(texto, (0.01*width, 0.01*height))
+class Box(Sprite):
+    def __init__(self):
+        box = RectangleAsset(0.25*width - 10, 100, line, Medium_Aquamarine)
+        super().__init__(box, (0.75*width - 10, 0.85*height))
+class FACT(Sprite):
+    def __init__(self, facts):
+        fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width-15)
+        super().__init__(fact, (0.75*width, 0.85*height))
+        
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
 stateQ = False
 
 states=['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Lousiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
 states_facts = {'Alabama':["Montegomery", "4,888,000"], 'Alaska':["Juneau", "740,000"], 'Arizona':["Phoenix", "7,123,000"], 'Arkansas':["Little Rock", "3,020,000"], 'California':["Sacramento", "39,776,000"], 'Colorado':["Denver", "5,684,000"], 'Connecticut':["Hartford", "3,588,000"], 'Delaware':["Dover", "971,180"], 'Florida':["Tallahassee", "21,312,000"], 'Georgia':["Atlanta", "10,545,000"], 'Hawaii':["Honolulu", "1,426,000"], 'Idaho':["Boise", "1,753,000"], 'Illinois':["Springfield", "12,768,000"], 'Indiana':["Indianapolis", "6,699,000"], 'Iowa':["Des Moines", "3,160,000"], 'Kansas':["Topeka", "2,918,000"], 'Kentucky':["Frankfort", "4,472,000"], 'Lousiana':["Baton Rouge", "4,682,000"], 'Maine':["Augusta", "1,341,000"], 'Maryland':["Annapolis", "6,079,000"], 'Massachusetts':["Boston", "6,895,000"], 'Michigan':["Lansing", "9,991,000"], 'Minnesota':["St. Paul", "5,628,000"], 'Mississippi':["Jackson", "2,982,000"], 'Missouri':["Jefferson City", "6,135,000"], 'Montana':["Helena", "1,062,000"], 'Nebraska':["Lincoln", "1,932,000"], 'Nevada':["Carson City", "3,056,000"], 'New Hampshire':["Concord", "1,350,000"], 'New Jersey':["Trenton", "9,032,000"], 'New Mexico':["Santa Fe", "2,090,000"], 'New York':["Albany", "19,862,000"], 'North Carolina':["Raleigh", "10,390,000"], 'North Dakota':["Bismarck", "755,000"], 'Ohio':["Columbus", "11,694,000"], 'Oklahoma':["Oklahoma City", "3,940,000"], 'Oregon':["Salem", "4,199,593"], 'Pennsylvania':["Harrisburg", "12,823,000"], 'Rhode Island':["Providence", "1,061,000"], 'South Carolina':["Columbia", "5,088,000"], 'South Dakota':["Pierre", "877,790"], 'Tennessee':["Nashville", "6,782,000"], 'Texas':["Austin", "28,704,330"], 'Utah':["Salt Lake City", "3,159,000"], 'Vermont':["Montpelier", "623,000"], 'Virginia':["Richmond", "8,525,000"], 'Washington':["Olympia", "7,530,000"], 'West Virginia':["Charleston", "1,803,000"], 'Wisconsin':["Madison", "5,818,000"], 'Wyoming':["Cheyenne", "573,000"]}
-
+#---------------------------------------------------------------------------------------------------------------
 def determinestate(x,y):
     global state_int, coordinates, state, states
     for s in range(len(coordinates)):
@@ -108,66 +117,70 @@ def ask():
             print ("CORRECT!")
         else:
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
+            
+def visible():
+    i.visible = False
+    box.visible = False
+    
+    if stateQ == True or capitalQ == True:
+        F.visible = False
+        C.visible = False
+    else: 
+        F.visible = True
+        C.visible = True
 
+#---------------------------------------------------------------------------------------------------------------
 def capitalquiz(event):
     global capitalQ, i
     capitalQ = not capitalQ
-    i.visible = False
-    box.visible = False
+    visible()
     if capitalQ == True:
         print("You are playing capital quiz")
         print("For a new question press the spacebar")
         print("To quit the game press 'c' again")
-        F.visible = False
-        C.visible = False
+
     else:
         print("The capital quiz has ended")
-        F.visible = True
-        C.visible = True
+
     
 def capitalQuiz(event):
     ask()
     
 def findstate(event):           
-    global stateQ, i, c
+    global stateQ, i, c, count
     stateQ = not stateQ
-    i.visible = False
-    box.visible = False
+    visible()
     if stateQ == True:
         c = 0
-        Counter(0)
+        count = Counter(0)
         print("You are playing 'Find the State'")
         print("To quit the game press 'f' again")
-        F.visible = False
-        C.visible = False
+
     else:
         print("'Find the State' game has ended")
-        F.visible = True
-        C.visible = True
+
     ask()
 
 def facts(event):
-    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box
+    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count
     determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
         if state == 0:
             print("Please try again")
         else:
-            i.visible = False
-            box.visible = False
+            visible()
             facts = states_facts[state]
             facts = """
 WELCOME TO {0}!
 Capital: {1}
 Population: {2}
 """.format(state, facts[0], facts[1])
-            fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width-15)
-            Box = RectangleAsset(0.25*width - 10, fact.height, line, Medium_Aquamarine)
-            box = Sprite(Box, (0.75*width - 10, 0.85*height))
-            i = Sprite(fact, (0.75*width, 0.85*height))
+            box = Box()
+            i = FACT(facts)
     
     elif stateQ == True:
         if r_state == state:
+            count.visible = False
             print("CORRECT!")
             c += 1
             count = Counter(c)
@@ -177,6 +190,9 @@ Population: {2}
                 print("Please click on the white dot")
             else:
                 print("Sorry that is {0}, please try again".format(state))
+                count.visible = False
+                c = 0
+                count = Counter(c)
 
 
 myapp.run()
