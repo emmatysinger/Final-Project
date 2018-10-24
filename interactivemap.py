@@ -173,7 +173,8 @@ def facts(event):
 WELCOME TO {0}!
 Capital: {1}
 Population: {2}
-""".format(state, facts[0], facts[1])
+Nickname: The {3} State
+""".format(state, facts[0], facts[1], facts[2])
             i = FACT(facts)
     
     elif stateQ == True:
