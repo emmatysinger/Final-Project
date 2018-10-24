@@ -55,13 +55,12 @@ class Counter(Sprite):
     def __init__(self, count):
         texto = TextAsset(text = str(count), style = '40pt Helvetica')
         super().__init__(texto, (0.01*width, 0.01*height))
-class Box(Sprite):
-    def __init__(self):
-        box = RectangleAsset(0.25*width - 10, 100, line, Medium_Aquamarine)
-        super().__init__(box, (0.75*width - 10, 0.85*height))
+
 class FACT(Sprite):
     def __init__(self, facts):
         fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width-15)
+        box = RectangleAsset(0.25*width - 10, fact.height, line, Medium_Aquamarine)
+        super().__init__(box, (0.75*width - 10, 0.85*height))
         super().__init__(fact, (0.75*width, 0.85*height))
         
 #---------------------------------------------------------------------------------------------------------------
@@ -176,7 +175,7 @@ WELCOME TO {0}!
 Capital: {1}
 Population: {2}
 """.format(state, facts[0], facts[1])
-            box = Box()
+            #box = Box()
             i = FACT(facts)
     
     elif stateQ == True:
