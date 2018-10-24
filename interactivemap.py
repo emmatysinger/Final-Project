@@ -60,8 +60,8 @@ class FACT(Sprite):
     def __init__(self, facts):
         fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width-15)
         box = RectangleAsset(0.25*width - 10, fact.height, line, Medium_Aquamarine)
-        super().__init__(box, (0.75*width - 10, 0.85*height))
-        super().__init__(fact, (0.75*width, 0.85*height))
+        super().__init__(box, (0.75*width - 10, 0.8*height))
+        super().__init__(fact, (0.75*width, 0.8*height))
         
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
