@@ -121,6 +121,7 @@ def ask():
 def visible():
     i.visible = False
     box.visible = False
+    count.visible = False
     
     if stateQ == True or capitalQ == True:
         F.visible = False
@@ -179,8 +180,8 @@ Population: {2}
             i = FACT(facts)
     
     elif stateQ == True:
+        visible()
         if r_state == state:
-            count.visible = False
             print("CORRECT!")
             c += 1
             count = Counter(c)
@@ -188,9 +189,9 @@ Population: {2}
         else:
             if state ==0:
                 print("Please click on the white dot")
+                count = Counter(c)
             else:
                 print("Sorry that is {0}, please try again".format(state))
-                count.visible = False
                 c = 0
                 count = Counter(c)
 
