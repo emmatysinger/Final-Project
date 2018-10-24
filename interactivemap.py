@@ -119,7 +119,6 @@ def ask():
             
 def visible():
     i.visible = False
-    box.visible = False
     count.visible = False
     
     if stateQ == True or capitalQ == True:
@@ -175,7 +174,6 @@ WELCOME TO {0}!
 Capital: {1}
 Population: {2}
 """.format(state, facts[0], facts[1])
-            #box = Box()
             i = FACT(facts)
     
     elif stateQ == True:
