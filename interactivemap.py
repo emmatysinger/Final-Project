@@ -7,7 +7,6 @@ import random
 
 myapp = App()
 
-
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
 Map=Sprite(MAP,(20,20))
 
@@ -67,6 +66,12 @@ class FACT(Sprite):
         self.BOX.visible = False
         self.visible = False
         
+class Correct(App):
+    def __init__(self):
+        super().__init__()
+        correct = ImageAsset("images/white_correct.png")
+        correct = Sprite(correct)
+    def action():    
 i = FACT(" ", no_line, white)
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
