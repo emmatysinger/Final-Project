@@ -70,8 +70,13 @@ class Correct(App):
     def __init__(self):
         super().__init__()
         correct = ImageAsset("images/white_correct.png")
-        correct = Sprite(correct)
-    def action():    
+        self.correct = Sprite(correct)
+
+    def action():
+        
+    def invisible():
+        self.correct.visible = False
+        
 i = FACT(" ", no_line, white)
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
