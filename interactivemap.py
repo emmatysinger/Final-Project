@@ -38,7 +38,7 @@ state_int = -1
 state = 0
 r_state = 0
 count = Sprite(blank, (width,height))
-i = Sprite(blank, (width,height))
+
 box = Sprite(blank, (width,height))
 
 for s in coordinates:
@@ -57,15 +57,17 @@ class Counter(Sprite):
         super().__init__(texto, (0.01*width, 0.01*height))
 
 class FACT(Sprite):
-    def __init__(self, facts):
+    def __init__(self, facts, Line, Color):
         fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width-15)
-        box = RectangleAsset(0.25*width - 10, fact.height, line, Medium_Aquamarine)
-        BOX = Sprite(box, (0.75*width - 10, 0.8*height))
+        box = RectangleAsset(0.25*width - 10, fact.height, Line, Color)
+        self.BOX = Sprite(box, (0.75*width - 10, 0.8*height))
         super().__init__(fact, (0.75*width, 0.8*height))
     
-    def invisible():
-        BOX.visible = False
+    def invisible(self):
+        self.BOX.visible = False
         self.visible = False
+        
+i = FACT(" ", no_line, white)
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
 stateQ = False
@@ -121,8 +123,8 @@ def ask():
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
 def visible():
-    i.visible = False
-    count.invisible()
+    i.invisible() 
+    count.visible = False
     
     if stateQ == True or capitalQ == True:
         F.visible = False
@@ -178,7 +180,7 @@ Capital: {1}
 Population: {2}
 Nickname: The {3} State
 """.format(state, facts[0], facts[1], facts[2])
-            i = FACT(facts)
+            i = FACT(facts, line, Medium_Aquamarine)
     
     elif stateQ == True:
         visible()
