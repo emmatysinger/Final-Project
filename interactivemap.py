@@ -44,10 +44,7 @@ for s in coordinates:
     x,y = s
     Sprite(dot, (x, y))
 
-findstate_i = TextAsset("Press 'f' to play Find the State", style ='12pt Helvetica', width = 150)
-capitalQ_i = TextAsset("Press 'c' to play the Capital Quiz", style ='12pt Helvetica', width = 150)
-F = Sprite(findstate_i, (0.01*width,0.94*height))
-C = Sprite(capitalQ_i, (0.01*width+175,0.94*height))
+
 
 #---------------------------------------------------------------------------------------------------------------
 class Counter(Sprite):
@@ -72,12 +69,32 @@ class Correct(App):
         correct = ImageAsset("images/white_correct.png")
         self.correct = Sprite(correct)
 
-    def action():
-        
-    def invisible():
+    def invisible(self):
         self.correct.visible = False
-        
+
+class Instructions(Sprite):
+    def __init__(self,instruct,position):
+        instruction = textAsset(text = instruct, style ='12pt Helvetica', width = 150)
+        super().__init__(instruction, position)
+
+findstate_i = "Press 'f' to play Find the State"
+capitalQ_i = "Press 'c' to play the Capital Quiz"
+instruct_findstate = """You are playing 'Find the State'
+"To quit the game press 'f' again"""
+instruct_capitalq = """You are playing capital quiz!
+- For a new question press the spacebar
+- To quit the game press 'c' again"""   
+GF = Instructions(findstate_i, (0.01*width,0.94*height))
+GC = Instructions(capitalQ_i, (0.01*width+175,0.94*height))
+F = 
+C = Instructions(instruct_capitalq
+     
+
+#---------------------------------------------------------------------------------------------------------------
+
 i = FACT(" ", no_line, white)
+yay = Correct()
+yay.invisible()
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
 stateQ = False
@@ -96,7 +113,7 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state
+    global r_state, yay
     r_state = random.choice(states)
     if stateQ == True:
         print("Where is {0}?".format(r_state))
@@ -128,12 +145,13 @@ def ask():
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
-            print ("CORRECT!")
+            yay = Correct()
         else:
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
 def visible():
-    i.invisible() 
+    i.invisible()
+    yay.invisible()
     count.visible = False
     
     if stateQ == True or capitalQ == True:
