@@ -74,7 +74,7 @@ class Correct(App):
 
 class Instructions(Sprite):
     def __init__(self,instruct,position):
-        instruction = textAsset(text = instruct, style ='12pt Helvetica', width = 150)
+        instruction = TextAsset(text = instruct, style ='12pt Helvetica', width = 150)
         super().__init__(instruction, position)
 
 findstate_i = "Press 'f' to play Find the State"
@@ -86,12 +86,11 @@ instruct_capitalq = """You are playing capital quiz!
 - To quit the game press 'c' again"""   
 GF = Instructions(findstate_i, (0.01*width,0.94*height))
 GC = Instructions(capitalQ_i, (0.01*width+175,0.94*height))
-F = 
-C = Instructions(instruct_capitalq
+F = Instructions(instruct_findstate, (0.01*width,0.9*height))
+C = Instructions(instruct_capitalq, (0.01*width,0.9*height))
      
 
 #---------------------------------------------------------------------------------------------------------------
-
 i = FACT(" ", no_line, white)
 yay = Correct()
 yay.invisible()
@@ -155,10 +154,17 @@ def visible():
     count.visible = False
     
     if stateQ == True or capitalQ == True:
+        GF.visible = False
+        GC.visible = False
+    else: 
+        GF.visible = True
+        GC.visible = True
         F.visible = False
         C.visible = False
-    else: 
+    
+    if stateQ == True:
         F.visible = True
+    elif capitalQ == True:
         C.visible = True
 
 #---------------------------------------------------------------------------------------------------------------
@@ -168,8 +174,6 @@ def capitalquiz(event):
     visible()
     if capitalQ == True:
         print("You are playing capital quiz")
-        print("For a new question press the spacebar")
-        print("To quit the game press 'c' again")
 
     else:
         print("The capital quiz has ended")
@@ -186,7 +190,6 @@ def findstate(event):
         c = 0
         count = Counter(0)
         print("You are playing 'Find the State'")
-        print("To quit the game press 'f' again")
 
     else:
         print("'Find the State' game has ended")
