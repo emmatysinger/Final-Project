@@ -73,21 +73,23 @@ class Correct(App):
         self.correct.visible = False
 
 class Instructions(Sprite):
-    def __init__(self,instruct,position):
-        instruction = TextAsset(text = instruct, style ='12pt Helvetica', width = 150)
+    def __init__(self,instruct,position, wid):
+        instruction = TextAsset(text = instruct, style ='12pt Helvetica', width = wid)
         super().__init__(instruction, position)
 
 findstate_i = "Press 'f' to play Find the State"
 capitalQ_i = "Press 'c' to play the Capital Quiz"
-instruct_findstate = """You are playing 'Find the State'
+instruct_findstate = """You are playing 'Find the State'!
 "To quit the game press 'f' again"""
 instruct_capitalq = """You are playing capital quiz!
 - For a new question press the spacebar
 - To quit the game press 'c' again"""   
-GF = Instructions(findstate_i, (0.01*width,0.94*height))
-GC = Instructions(capitalQ_i, (0.01*width+175,0.94*height))
-F = Instructions(instruct_findstate, (0.01*width,0.9*height))
-C = Instructions(instruct_capitalq, (0.01*width,0.9*height))
+GF = Instructions(findstate_i, (0.01*width,0.94*height), 150)
+GC = Instructions(capitalQ_i, (0.01*width+175,0.94*height), 150)
+F = Instructions(instruct_findstate, (0.01*width,0.9*height), 225)
+C = Instructions(instruct_capitalq, (0.01*width,0.9*height), 225)
+F.visible = False
+C.visible = False
      
 
 #---------------------------------------------------------------------------------------------------------------
