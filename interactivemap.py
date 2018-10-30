@@ -74,6 +74,10 @@ class Correct(App):
 
     def invisible(self):
         self.correct.visible = False
+    
+    def action(self):
+        self.x += randint(-10,10)/10
+        self.y += randint(-10,10)/10
 
 class Instructions(Sprite):
     def __init__(self,instruct,position, wid):
