@@ -28,6 +28,7 @@ for s in coordinates_i:
 white = Color(0xfffafa, 1)
 black = Color(0x000000, 1)
 Medium_Aquamarine = Color(0x66cdaa, 1)
+Pink = Color(0xeea2ad, 1)
 line = LineStyle(1, black)
 no_line = LineStyle(1, white)
 dot_size = 8/.44*Map.scale
@@ -77,20 +78,30 @@ class Instructions(Sprite):
         instruction = TextAsset(text = instruct, style ='12pt Helvetica', width = wid)
         super().__init__(instruction, position)
 
+Gbox = RectangleAsset(350,0.08*height, line, Pink)
+Gbox = Sprite(Gbox, (0,0.919*height))
+Fbox = RectangleAsset(275,0.18*height, line, Pink)
+Fbox = Sprite(Fbox, (0,0.819*height))
+Cbox = RectangleAsset(305,0.18*height, line, Pink)
+Cbox = Sprite(Cbox, (0,0.819*height))
+
 findstate_i = "Press 'f' to play Find the State"
 capitalQ_i = "Press 'c' to play the Capital Quiz"
 instruct_findstate = """You are playing 'Find the State'!
-"To quit the game press 'f' again"""
+- Click on the white dot
+- To quit the game press 'f' again"""
 instruct_capitalq = """You are playing capital quiz!
 - For a new question press the spacebar
 - To quit the game press 'c' again"""   
 GF = Instructions(findstate_i, (0.01*width,0.94*height), 150)
 GC = Instructions(capitalQ_i, (0.01*width+175,0.94*height), 150)
-F = Instructions(instruct_findstate, (0.01*width,0.9*height), 225)
-C = Instructions(instruct_capitalq, (0.01*width,0.9*height), 225)
+F = Instructions(instruct_findstate, (0.01*width,0.85*height), 250)
+C = Instructions(instruct_capitalq, (0.01*width,0.85*height), 280)
 F.visible = False
 C.visible = False
-     
+Fbox.visible = False
+Cbox.visible = False
+
 
 #---------------------------------------------------------------------------------------------------------------
 i = FACT(" ", no_line, white)
@@ -158,16 +169,22 @@ def visible():
     if stateQ == True or capitalQ == True:
         GF.visible = False
         GC.visible = False
+        Gbox.visible = False
     else: 
         GF.visible = True
         GC.visible = True
         F.visible = False
         C.visible = False
+        Fbox.visible = False
+        Cbox.visible = False
+        Gbox.visible = True
     
     if stateQ == True:
         F.visible = True
+        Fbox.visible = True
     elif capitalQ == True:
         C.visible = True
+        Cbox.visible = True
 
 #---------------------------------------------------------------------------------------------------------------
 def capitalquiz(event):
