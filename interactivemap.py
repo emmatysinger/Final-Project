@@ -38,14 +38,16 @@ state_int = -1
 state = 0
 r_state = 0
 count = Sprite(blank, (width,height))
-
 box = Sprite(blank, (width,height))
 
 for s in coordinates:
     x,y = s
     Sprite(dot, (x, y))
 
-
+Delaware = LineAsset(57/0.44*Map.scale, 4/.44*Map.scale, line)
+Delaware = Sprite(Delaware, (935/0.44*Map.scale,290/0.44*Map.scale))
+RI = LineAsset(25/0.44*Map.scale, 35/.44*Map.scale, line)
+RI = Sprite(RI, (1000/0.44*Map.scale,205/0.44*Map.scale))
 
 #---------------------------------------------------------------------------------------------------------------
 class Counter(Sprite):
