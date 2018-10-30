@@ -192,6 +192,9 @@ def visible():
         C.visible = True
         Cbox.visible = True
 
+def step():
+    Correct.action()
+
 #---------------------------------------------------------------------------------------------------------------
 def capitalquiz(event):
     global capitalQ, i
