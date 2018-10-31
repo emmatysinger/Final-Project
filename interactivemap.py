@@ -69,10 +69,10 @@ class FACT(Sprite):
         
 class Correct(Sprite):
     global go
+    go = True
     def __init__(self):
         correct = ImageAsset("images/white_correct.png")
         super().__init__(correct, (width/2,height/2))
-        go = True
 
     def action(self):
         self.x += randint(-10,10)/10
@@ -212,6 +212,7 @@ def capitalquiz(event):
 def capitalQuiz(event):
     global go
     go = False
+    visible()
     ask()
     
 def findstate(event):           
