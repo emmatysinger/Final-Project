@@ -67,7 +67,7 @@ class FACT(Sprite):
         self.BOX.visible = False
         self.visible = False
         
-class Correct(App):
+class Correct(Sprite):
     global go
     def __init__(self):
         correct = ImageAsset("images/white_correct.png")
@@ -111,7 +111,7 @@ Cbox.visible = False
 #---------------------------------------------------------------------------------------------------------------
 i = FACT(" ", no_line, white)
 yay = Correct()
-yay.invisible()
+yay.visible = False
 #---------------------------------------------------------------------------------------------------------------
 capitalQ = False
 stateQ = False
@@ -168,7 +168,7 @@ def ask():
             
 def visible():
     i.invisible()
-    yay.invisible()
+    yay.visible = False
     count.visible = False
     
     if stateQ == True or capitalQ == True:
@@ -193,8 +193,9 @@ def visible():
 
 def step():
     global go 
-    while go == True:
-        Correct.action()
+    if go == True:
+        print("correct")
+        yay.action()
 
 #---------------------------------------------------------------------------------------------------------------
 def capitalquiz(event):
@@ -261,7 +262,7 @@ Nickname: The {3} State
                 count = Counter(c)
 
 
-myapp.run()
+myapp.run(step)
 myapp.listenKeyEvent('keydown','c', capitalquiz)
 myapp.listenKeyEvent('keydown','f',findstate)
 myapp.listenMouseEvent('click',facts)
