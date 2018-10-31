@@ -39,6 +39,7 @@ state = 0
 r_state = 0
 count = Sprite(blank, (width,height))
 box = Sprite(blank, (width,height))
+go = False
 
 for s in coordinates:
     x,y = s
@@ -67,14 +68,12 @@ class FACT(Sprite):
         self.visible = False
         
 class Correct(App):
+    global go
     def __init__(self):
-        super().__init__()
         correct = ImageAsset("images/white_correct.png")
-        self.correct = Sprite(correct)
+        super().__init__(correct, (width/2,height/2))
+        go = True
 
-    def invisible(self):
-        self.correct.visible = False
-    
     def action(self):
         self.x += randint(-10,10)/10
         self.y += randint(-10,10)/10
@@ -193,7 +192,9 @@ def visible():
         Cbox.visible = True
 
 def step():
-    Correct.action()
+    global go 
+    while go == True:
+        Correct.action()
 
 #---------------------------------------------------------------------------------------------------------------
 def capitalquiz(event):
@@ -208,6 +209,8 @@ def capitalquiz(event):
 
     
 def capitalQuiz(event):
+    global go
+    go = False
     ask()
     
 def findstate(event):           
