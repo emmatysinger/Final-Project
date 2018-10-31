@@ -69,10 +69,10 @@ class FACT(Sprite):
         
 class Correct(Sprite):
     global go
-    go = True
     def __init__(self):
         correct = ImageAsset("images/white_correct.png")
         super().__init__(correct, (width/2,height/2))
+        go = True
         
     def invisible(self):
         self.visible = False
