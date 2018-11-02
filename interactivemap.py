@@ -72,7 +72,6 @@ class Correct(Sprite):
     def __init__(self):
         correct = ImageAsset("images/white_correct.png")
         super().__init__(correct, (width/2,height/2))
-        go = True
         
     def invisible(self):
         self.visible = False
@@ -134,7 +133,7 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state, yay
+    global r_state, yay, go
     r_state = random.choice(states)
     if stateQ == True:
         print("Where is {0}?".format(r_state))
@@ -167,6 +166,7 @@ def ask():
         correct_answer = correct_answer[0]
         if answer == correct_answer:
             yay = Correct()
+            go = True
         else:
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
