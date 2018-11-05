@@ -64,8 +64,8 @@ class FACT(Sprite):
         super().__init__(fact, (0.75*width, 0.8*height))
     
     def invisible(self):
-        self.BOX.visible = False
-        self.visible = False
+        self.BOX.destroy()
+        self.destroy()
         
 class Correct(Sprite):
     global go
