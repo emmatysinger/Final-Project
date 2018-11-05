@@ -173,7 +173,7 @@ def ask():
 def visible():
     i.invisible()
     yay.invisible()
-    count.visible = False
+    count.destroy()
     
     if stateQ == True or capitalQ == True:
         GF.visible = False
