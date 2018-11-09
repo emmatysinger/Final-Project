@@ -3,6 +3,7 @@
 
 #INTERACTIVE MAP
 from ggame import *
+from random import randint
 import random
 
 myapp = App()
@@ -38,6 +39,7 @@ state_int = -1
 state = 0
 r_state = 0
 count = Sprite(blank, (width,height))
+time = Sprite(blank, (width,height))
 box = Sprite(blank, (width,height))
 go = 0
 
@@ -55,6 +57,11 @@ class Counter(Sprite):
     def __init__(self, count):
         texto = TextAsset(text = str(count), style = '40pt Helvetica')
         super().__init__(texto, (0.01*width, 0.01*height))
+        
+class Timer(Sprite):
+    def __init__(self, time):
+        texto = TextAsset(text = str(time), style = '40pt Helvetica')
+        super().__init__(texto, (0.99*width, 0.01*height))
 
 class FACT(Sprite):
     def __init__(self, facts, Line, Color):
@@ -75,11 +82,11 @@ class Correct(Sprite):
         
     def invisible(self):
         self.visible = False
-        go = False
+        #go = False
 
     def action(self):
-        self.x += randint(-10,10)/10
-        self.y += randint(-10,10)/10
+        self.x += randint(-20,20)
+        self.y += randint(-20,20)
 
 class Instructions(Sprite):
     def __init__(self,instruct,position, wid):
@@ -133,10 +140,12 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state, yay, go
+    global r_state, yay, go, r, t
     r_state = random.choice(states)
     if stateQ == True:
         print("Where is {0}?".format(r_state))
+        t = 20
+        o = 0
     if capitalQ == True:
         answer = input("""What is the capital of {0}? 
         
@@ -167,6 +176,7 @@ def ask():
         if answer == correct_answer:
             yay = Correct()
             go = True
+            r = 0
         else:
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
@@ -196,10 +206,20 @@ def visible():
         Cbox.visible = True
 
 def step():
-    global go 
+    global go, r, t 
     if go == True:
-        print("correct")
-        yay.action()
+        r += 1
+        if r == 3:
+            yay.action()
+            r = 0
+    if stateQ == True:
+        o += 1
+        if o == 30:
+            time.visible = False
+            t -= 1
+            time = Timer(t)
+            o = 0
+        
 
 #---------------------------------------------------------------------------------------------------------------
 def capitalquiz(event):
@@ -214,7 +234,8 @@ def capitalquiz(event):
 
     
 def capitalQuiz(event):
-    global go
+    global go, yay
+    yay.invisible()
     visible()
     ask()
     
@@ -257,7 +278,7 @@ Nickname: The {3} State
             count = Counter(c)
             ask()
         else:
-            if state ==0:
+            if state == 0:
                 print("Please click on the white dot")
                 count = Counter(c)
             else:
