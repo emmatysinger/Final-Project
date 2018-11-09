@@ -116,8 +116,7 @@ F.visible = False
 C.visible = False
 Fbox.visible = False
 Cbox.visible = False
-
-
+    
 #---------------------------------------------------------------------------------------------------------------
 i = FACT(" ", no_line, white)
 yay = Correct()
