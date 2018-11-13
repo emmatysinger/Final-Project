@@ -67,10 +67,10 @@ class Timer(Sprite):
 
 class FACT(Sprite):
     def __init__(self, facts, Line, Color):
-        fact = TextAsset(text = facts, style ='18px Helvetica', width = 0.25*width-15)
-        box = RectangleAsset(0.25*width - 10, fact.height, Line, Color)
-        self.BOX = Sprite(box, (0.75*width - 10, 0.8*height))
-        super().__init__(fact, (0.75*width, 0.8*height))
+        fact = TextAsset(text = facts, style ='18px Helvetica', width = 0.3*width-15)
+        box = RectangleAsset(0.3*width - 10, fact.height, Line, Color)
+        self.BOX = Sprite(box, (0.7*width - 10, 0.8*height))
+        super().__init__(fact, (0.7*width, 0.8*height))
     
     def invisible(self):
         self.BOX.visible = False
@@ -263,11 +263,11 @@ def facts(event):
             visible()
             facts = states_facts[state]
             facts = """
-WELCOME TO {0}!
-Capital: {1}
-Population: {2}
-Nickname: The {3} State
-""".format(state, facts[0], facts[1], facts[2])
+    WELCOME TO {0}!
+    Capital: {1}
+    Population: {2}
+    Nickname: The {3} State
+    """.format(state, facts[0], facts[1], facts[2])
             i = FACT(facts, line, Medium_Aquamarine)
     
     elif stateQ == True:
