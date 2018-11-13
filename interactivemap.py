@@ -55,18 +55,17 @@ RI = Sprite(RI, (1000/0.44*Map.scale,205/0.44*Map.scale))
 #---------------------------------------------------------------------------------------------------------------
 class Counter(Sprite):
     def __init__(self, count):
-        texto = TextAsset(text = str(count), style = '40pt Helvetica', color = black)
+        texto = TextAsset(text = str(count), style = '45px Helvetica', color = black)
         super().__init__(texto, (0.01*width, 0.01*height))
-        print('HI', count)
         
 class Timer(Sprite):
     def __init__(self, time):
-        texto = TextAsset(text = str(time), style = '40pt Helvetica')
+        texto = TextAsset(text = str(time), style = '45px Helvetica')
         super().__init__(texto, (0.99*width, 0.01*height))
 
 class FACT(Sprite):
     def __init__(self, facts, Line, Color):
-        fact = TextAsset(text = facts, style ='12pt Helvetica', width = 0.25*width-15)
+        fact = TextAsset(text = facts, style ='18px Helvetica', width = 0.25*width-15)
         box = RectangleAsset(0.25*width - 10, fact.height, Line, Color)
         self.BOX = Sprite(box, (0.75*width - 10, 0.8*height))
         super().__init__(fact, (0.75*width, 0.8*height))
@@ -91,7 +90,7 @@ class Correct(Sprite):
 
 class Instructions(Sprite):
     def __init__(self,instruct,position, wid):
-        instruction = TextAsset(text = instruct, style ='12pt Helvetica', width = wid)
+        instruction = TextAsset(text = instruct, style ='18px Helvetica', width = wid)
         super().__init__(instruction, position)
 
 Gbox = RectangleAsset(350,0.08*height, line, Pink)
@@ -276,9 +275,6 @@ Nickname: The {3} State
             print("CORRECT!")
             c += 1
             count = Counter(c)
-            # texto = TextAsset(text = str(c), style = '40pt Helvetica', color = black)
-            # hi = RectangleAsset(4,2,line,Pink)
-            # Sprite = (hi)
             ask()
         else:
             if state == 0:
