@@ -232,7 +232,6 @@ def capitalquiz(event):
 
     else:
         print("The capital quiz has ended")
-
     
 def capitalQuiz(event):
     global go, yay
