@@ -63,6 +63,8 @@ class Timer(Sprite):
         texto = TextAsset(text = str(time), style = '45px Helvetica')
         super().__init__(texto, (0.99*width, 0.01*height))
 
+    
+
 class FACT(Sprite):
     def __init__(self, facts, Line, Color):
         fact = TextAsset(text = facts, style ='18px Helvetica', width = 0.25*width-15)
@@ -139,7 +141,7 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state, yay, go, r, t
+    global r_state, yay, go, r, t, o
     r_state = random.choice(states)
     if stateQ == True:
         print("Where is {0}?".format(r_state))
@@ -205,19 +207,19 @@ def visible():
         Cbox.visible = True
 
 def step():
-    global go, r, t 
+    global go, r, t, o, stateQ 
     if go == True:
         r += 1
         if r == 3:
             yay.action()
             r = 0
-    # if stateQ == True:
-    #     o += 1
-    #     if o == 30:
-    #         time.visible = False
-    #         t -= 1
-    #         time = Timer(t)
-    #         o = 0
+    if stateQ == True:
+        o += 1
+        if o == 30:
+            time.visible = False
+            t -= 1
+            time = Timer(t)
+            o = 0
         
 
 #---------------------------------------------------------------------------------------------------------------
