@@ -183,7 +183,7 @@ def ask():
 def visible():
     i.invisible()
     yay.invisible()
-    #count.visible = False
+    count.visible = False
     
     if stateQ == True or capitalQ == True:
         GF.visible = False
@@ -212,13 +212,13 @@ def step():
         if r == 3:
             yay.action()
             r = 0
-    if stateQ == True:
-        o += 1
-        if o == 30:
-            time.visible = False
-            t -= 1
-            time = Timer(t)
-            o = 0
+    # if stateQ == True:
+    #     o += 1
+    #     if o == 30:
+    #         time.visible = False
+    #         t -= 1
+    #         time = Timer(t)
+    #         o = 0
         
 
 #---------------------------------------------------------------------------------------------------------------
@@ -276,6 +276,9 @@ Nickname: The {3} State
             print("CORRECT!")
             c += 1
             count = Counter(c)
+            # texto = TextAsset(text = str(c), style = '40pt Helvetica', color = black)
+            # hi = RectangleAsset(4,2,line,Pink)
+            # Sprite = (hi)
             ask()
         else:
             if state == 0:
