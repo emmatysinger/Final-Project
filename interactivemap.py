@@ -55,8 +55,9 @@ RI = Sprite(RI, (1000/0.44*Map.scale,205/0.44*Map.scale))
 #---------------------------------------------------------------------------------------------------------------
 class Counter(Sprite):
     def __init__(self, count):
-        texto = TextAsset(text = str(count), style = '40pt Helvetica')
+        texto = TextAsset(text = str(count), style = '40pt Helvetica', color = black)
         super().__init__(texto, (0.01*width, 0.01*height))
+        print('HI', count)
         
 class Timer(Sprite):
     def __init__(self, time):
@@ -182,7 +183,7 @@ def ask():
 def visible():
     i.invisible()
     yay.invisible()
-    count.visible = False
+    #count.visible = False
     
     if stateQ == True or capitalQ == True:
         GF.visible = False
