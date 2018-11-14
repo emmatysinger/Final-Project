@@ -60,7 +60,7 @@ class Counter(Sprite):
         
 class Timer(Sprite):
     def __init__(self, time):
-        texto = TextAsset(text = str(time), style = '45px Helvetica', )
+        texto = TextAsset(text = str(time), style = '45px Helvetica')
         super().__init__(texto, (0.94*width, 0.01*height))
 
 class FACT(Sprite):
@@ -139,11 +139,13 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state, yay, go, r, t, o
+    global r_state, yay, go, r, t, o, time
     r_state = random.choice(states)
     if stateQ == True:
         print("Where is {0}?".format(r_state))
-        t = 20
+        t = 10
+        time.visible = False
+        time = Timer(t)
         o = 0
     if capitalQ == True:
         answer = input("""What is the capital of {0}? 
@@ -212,7 +214,7 @@ def step():
             yay.action()
             r = 0
     if stateQ == True:
-        if o == 30:
+        if o == 60:
             time.visible = False
             t -= 1
             time = Timer(t)
