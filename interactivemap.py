@@ -13,8 +13,8 @@ Map=Sprite(MAP,(20,20))
 
 width=myapp.width
 height=myapp.height
-mp_w = Map.width
-mp_h = Map.height
+mp_w = 2346
+mp_h = 1484
 if width/mp_w < 0.8*height/mp_h:
     Map.scale = (width-20)/mp_w
 else:
