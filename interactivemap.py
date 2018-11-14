@@ -60,10 +60,8 @@ class Counter(Sprite):
         
 class Timer(Sprite):
     def __init__(self, time):
-        texto = TextAsset(text = str(time), style = '45px Helvetica')
-        super().__init__(texto, (0.99*width, 0.01*height))
-
-    
+        texto = TextAsset(text = str(time), style = '45px Helvetica', )
+        super().__init__(texto, (0.94*width, 0.01*height))
 
 class FACT(Sprite):
     def __init__(self, facts, Line, Color):
@@ -207,20 +205,20 @@ def visible():
         Cbox.visible = True
 
 def step():
-    global go, r, t, o, stateQ 
+    global go, r, t, o, stateQ, time 
     if go == True:
         r += 1
         if r == 3:
             yay.action()
             r = 0
     if stateQ == True:
-        o += 1
         if o == 30:
             time.visible = False
             t -= 1
             time = Timer(t)
             o = 0
-        
+        else:
+            o += 1
 
 #---------------------------------------------------------------------------------------------------------------
 def capitalquiz(event):
