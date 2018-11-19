@@ -1,5 +1,4 @@
-# Title of Your Project Here
-
+# Interactive Map
 
 
 ## Functional Specification
@@ -31,3 +30,16 @@ Your specification should **not** include the following types of information:
 * Names of any specific files in the project.
 * How you will structure the classes, functions and code in your program.
 * The name of any files or tools that you will use to design the program.
+
+This program is an interactive map of the United States. There are 3 main features the user can use. The user can click on any state to learn more about the state. The user can play a capital game where they have to name of capital of a given state. Finally, the user can play find the state game, where they must locate a given state. 
+
+The interactive map is accessible vis https://runpython.org. 
+
+The base graphic of this interactive map is a map of the United States with white dots on each state. In the bottom left corner are instructions on how to play the two availble games. 
+
+Informational Mode: This is the default mode. Whenever the user quits either the capital quiz or the find the state game, the program returns to this mode.  
+The user can click on a state by clicking on a white dot and a box will pop up with information about the state. This includes the capital, the population and the nickname. 
+
+Capital Quiz:
+
+Find the State Game:
