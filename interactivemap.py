@@ -217,8 +217,9 @@ def step():
     if Time == True:
         if t == 0:
             time.visible = False
+            count.visible = False
             count = Counter(0)
-            print("You ran out of time")
+            print("You ran out of time. Press the space bar to start again")
             time = Timer(0)
             Time = False
         if o == 60:
@@ -241,10 +242,15 @@ def capitalquiz(event):
         print("The capital quiz has ended")
     
 def capitalQuiz(event):
-    global go, yay
-    yay.invisible()
-    visible()
-    ask()
+    global go, yay, stateQ, capitalQ, count, Time
+    if capitalQ == True:
+        yay.invisible()
+        visible()
+        ask()
+    if stateQ == True:
+        ask()
+        Time = True
+
     
 def findstate(event):           
     global stateQ, i, c, count, Time
