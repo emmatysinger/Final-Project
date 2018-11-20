@@ -138,14 +138,20 @@ states_facts = {'Alabama':["Montegomery", "4,888,000", "Yellowhammer"], 'Alaska'
 
 #----------   UNIVERSAL FUNCTIONS    ---------------------------------------------------------------------#
 def rand_state():
-    global states, r_state, states_used
+    global states, r_state, states_used, go
     r_state = random.choice(states)
     if len(states_used) < 50:
         while r_state in states_used:
             r_state = random.choice(states)
         states_used.append(r_state)
     elif len(states_used) == 50:
-        print("CONGRATS! You have found all 50 states")
+        go = True
+        if stateQ == True:
+            print("CONGRATS! You have found all 50 states")
+            stateQ = False
+        if capitalQ == True:
+            print("CONGRATS! You named the capital of all 50 states")
+            capitalQ = False
 
 def determinestate(x,y):
     global state_int, coordinates, state, states
@@ -250,8 +256,9 @@ def step():
 
 #--------   KEY EVENTS    ------------------------------------------------------------------------------#
 def capitalquiz(event):
-    global capitalQ, i
+    global capitalQ, i, states_used
     capitalQ = not capitalQ
+    states_used = []
     visible()
     if capitalQ == True:
         print("You are playing capital quiz")
@@ -271,9 +278,10 @@ def capitalQuiz(event):
 
     
 def findstate(event):           
-    global stateQ, i, c, count, Time
+    global stateQ, i, c, count, Time, states_used
     stateQ = not stateQ
     Time = not Time
+    states_used = []
     visible()
     if stateQ == True:
         c = 0
@@ -286,7 +294,7 @@ def findstate(event):
     ask()
 
 def facts(event):
-    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count
+    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count, Time
     determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
         if state == 0:
@@ -302,7 +310,7 @@ def facts(event):
     """.format(state, facts[0], facts[1], facts[2])
             i = FACT(facts, line, Medium_Aquamarine)
     
-    elif stateQ == True:
+    elif stateQ == True and Time == True:
         visible()
         if r_state == state:
             print("CORRECT!")
