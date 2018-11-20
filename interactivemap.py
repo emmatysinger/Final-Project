@@ -56,7 +56,7 @@ count = Sprite(blank, (width,height))
 time = Sprite(blank, (width,height))
 box = Sprite(blank, (width,height))
 go = 0
-states_used
+states_used = []
 
 #------------    SPRITE CLASSES    --------------------------------------------------------------------------#
 class Counter(Sprite):
@@ -143,7 +143,7 @@ def rand_state():
     if len(states_used) < 50:
         while r_state in states_used:
             r_state = random.choice(states)
-        states_used.sppend(r_state)
+        states_used.append(r_state)
     elif len(states_used) == 50:
         print("CONGRATS! You have found all 50 states")
 
@@ -159,7 +159,7 @@ def determinestate(x,y):
 
 def ask():
     global r_state, yay, go, r, t, o, time
-    r_state = random.choice(states)
+    rand_state()
     if stateQ == True:
         print("Where is {0}?".format(r_state))
         t = 10
