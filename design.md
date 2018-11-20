@@ -24,3 +24,9 @@ I wrote an algorithm to determine which state the user is clicking on. The limit
 A list of the coordinates of each state (the coordinates of the white dot on each state) in alphabetical order is created based on the screen size. 
 When the screen is clicked a function named determinestate(x,y) is run. The x and y coordinates of where the user clicked are the puts. The algorithm looks to see if the difference between the x-coordinate of the click and the x-coordinate of the state is less than twice the radius of the white dot (which is dependent on the screen size). The same is done with the y-coordinates and if both are true then the algorithm stores that state as "state" and stops. If the preceding conditions are false the algorithm runs through every state until it either reaches a match or has compared the clicked coordinates to every state. 
 
+Informational Mode:
+
+Capital Quiz:
+
+Find the State Game: 
+
