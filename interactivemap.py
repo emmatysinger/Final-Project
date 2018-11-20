@@ -56,6 +56,7 @@ count = Sprite(blank, (width,height))
 time = Sprite(blank, (width,height))
 box = Sprite(blank, (width,height))
 go = 0
+q = 0
 states_used = []
 
 #------------    SPRITE CLASSES    --------------------------------------------------------------------------#
@@ -82,9 +83,9 @@ class FACT(Sprite):
         
 class Correct(Sprite):
     global go
-    def __init__(self):
+    def __init__(self,x,y):
         correct = ImageAsset("images/white_correct.png")
-        super().__init__(correct, (width/2,height/2))
+        super().__init__(correct, (x,y))
         
     def invisible(self):
         self.visible = False
@@ -138,14 +139,17 @@ states_facts = {'Alabama':["Montegomery", "4,888,000", "Yellowhammer"], 'Alaska'
 
 #----------   UNIVERSAL FUNCTIONS    ---------------------------------------------------------------------#
 def rand_state():
-    global states, r_state, states_used, go
+    global states, r_state, states_used, go, r, yay, q
     r_state = random.choice(states)
     if len(states_used) < 50:
         while r_state in states_used:
             r_state = random.choice(states)
         states_used.append(r_state)
     elif len(states_used) == 50:
+        yay = Correct(width/2,height/2)
         go = True
+        r = 0
+        q = 0
         if stateQ == True:
             print("CONGRATS! You have found all 50 states")
             stateQ = False
@@ -200,9 +204,7 @@ def ask():
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
-            yay = Correct()
-            go = True
-            r = 0
+            yay = Correct(0.7*width,0.8*height)
         else:
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
@@ -232,8 +234,9 @@ def visible():
         Cbox.visible = True
 
 def step():
-    global go, r, t, o, stateQ, time, count, Time 
+    global go, r, t, o, stateQ, time, count, Time, q 
     if go == True:
+        q += 1
         r += 1
         if r == 3:
             yay.action()
@@ -253,6 +256,8 @@ def step():
             o = 0
         else:
             o += 1
+    
+    if q == 30
 
 #--------   KEY EVENTS    ------------------------------------------------------------------------------#
 def capitalquiz(event):
