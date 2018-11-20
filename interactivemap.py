@@ -56,6 +56,7 @@ count = Sprite(blank, (width,height))
 time = Sprite(blank, (width,height))
 box = Sprite(blank, (width,height))
 go = 0
+states_used
 
 #------------    SPRITE CLASSES    --------------------------------------------------------------------------#
 class Counter(Sprite):
@@ -137,7 +138,7 @@ states_facts = {'Alabama':["Montegomery", "4,888,000", "Yellowhammer"], 'Alaska'
 
 #----------   UNIVERSAL FUNCTIONS    ---------------------------------------------------------------------#
 def rand_state():
-    global state
+    global state, r_state, states_used
 
 def determinestate(x,y):
     global state_int, coordinates, state, states
