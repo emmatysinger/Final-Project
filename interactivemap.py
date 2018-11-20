@@ -127,7 +127,7 @@ Cbox.visible = False
     
 #----------    MORE VARIABLES   -------------------------------------------------------------------------#
 i = FACT(" ", no_line, white)
-yay = Correct()
+yay = Correct(0,0)
 yay.invisible()
 capitalQ = False
 stateQ = False
@@ -139,13 +139,14 @@ states_facts = {'Alabama':["Montegomery", "4,888,000", "Yellowhammer"], 'Alaska'
 
 #----------   UNIVERSAL FUNCTIONS    ---------------------------------------------------------------------#
 def rand_state():
-    global states, r_state, states_used, go, r, yay, q
+    global states, r_state, states_used, go, r, yay, q, stateQ, capitalQ, Time
     r_state = random.choice(states)
     if len(states_used) < 50:
         while r_state in states_used:
             r_state = random.choice(states)
         states_used.append(r_state)
     elif len(states_used) == 50:
+        Time = False
         yay = Correct(width/2,height/2)
         go = True
         r = 0
@@ -257,7 +258,8 @@ def step():
         else:
             o += 1
     
-    if q == 30
+    if q == 300:
+        go = False
 
 #--------   KEY EVENTS    ------------------------------------------------------------------------------#
 def capitalquiz(event):
@@ -283,7 +285,7 @@ def capitalQuiz(event):
 
     
 def findstate(event):           
-    global stateQ, i, c, count, Time, states_used
+    global stateQ, i, c, count, Time, states_used, time
     stateQ = not stateQ
     Time = not Time
     states_used = []
@@ -292,9 +294,9 @@ def findstate(event):
         c = 0
         count = Counter(0)
         print("You are playing 'Find the State'")
-
     else:
         print("'Find the State' game has ended")
+        time.visible = False
 
     ask()
 
