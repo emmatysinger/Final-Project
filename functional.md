@@ -34,7 +34,7 @@ Your specification should **not** include the following types of information:
 
 This program is an interactive map of the United States. There are 3 main features the user can use. The user can click on any state to learn more about the state. The user can play a capital game where they have to name of capital of a given state. Finally, the user can play find the state game, where they must locate a given state. 
 
-The interactive map is accessible vis https://runpython.org. 
+The interactive map is accessible via https://runpython.org. 
 
 The base graphic of this interactive map is a map of the United States with white dots on each state. In the bottom left corner are instructions on how to play the two availble games. 
 
@@ -42,6 +42,7 @@ Informational Mode: This is the default mode. Whenever the user quits either the
 The user can click on a state by clicking on a white dot and a box in the graphics screen will pop up with information about the state. This includes the capital, the population and the nickname. 
 
 Capital Quiz: The user can press the 'f' key to start and stop the quiz. When the quiz is started, the instructions box in the bottom left corner will change to be instructions about this quiz specifically. 
-The user needs to press the spacebar to generate a new question. When the spacebar is pressed an input window will appear asking "What is the capital of STATE?" When the user answers the program will determine if they are correct or incorrect.  
+The user needs to press the spacebar to generate a new question. When the spacebar is pressed an input window will appear asking "What is the capital of STATE?" When the user answers the program will determine if they are correct or incorrect and tell the user on the console.  
 
-Find the State Game: The user can press the 'c' key to start and stop the quiz. When the game is started, the instructions box in the bottom left corner will change to be instructions about this game specifically. Right away the user will be asked "Where is STATE?", this will appear in the console. The user has 10 seconds, which appears as a timer in the top right corner of the graphics screen, to answer by clicking on a state and the program will determine if the are correct or incorrect. If the user is correct, they will gain one point and the program will ask a new question. If the user is incorrect, the program will reset the counter to 0 and will ask a new question. If the user clicked somewhere that is not a 
+Find the State Game: The user can press the 'c' key to start and stop the quiz. When the game is started, the instructions box in the bottom left corner will change to be instructions about this game specifically. 
+Right away the user will be asked "Where is STATE?", this will appear in the console. The user has 10 seconds, which appears as a timer in the top right corner of the graphics screen, to answer by clicking on a state and the program will determine if the are correct or incorrect. If the user is correct, they will gain one point, which appears in the top left corner of the graphics screen and the program will ask a new question. If the user is incorrect, the program will reset the counter to 0 and will ask a new question. If the user clicked somewhere that is not a white dot, the user will be told in the console to click on a white dot. 
