@@ -5,7 +5,6 @@
 from ggame import *
 from random import randint
 import random
-from math import *
 
 myapp = App()
 
@@ -16,10 +15,10 @@ Medium_Aquamarine = Color(0x66cdaa, 1)
 Pink = Color(0xeea2ad, 1)
 line = LineStyle(1, black)
 no_line = LineStyle(1, white)
-Bright_Green = Color(0x00C957, 1)
-Bright_Red = Color(0xEE2C2C, 1)
-Mute_Green = Color(0x00C957, 0.4)
-Mute_Red = Color(0xEE2C2C, 0.4)
+Bright_Green = Color(0x00c957, 1)
+Bright_Red = Color(0xee2c2c, 1)
+Mute_Green = Color(0x00c957, 0.4)
+Mute_Red = Color(0xee2c2c, 0.4)
 
 #-----------    CREATE MAP ----------------------------------------------------------------------------#
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
@@ -78,7 +77,7 @@ class Timer(Sprite):
 class FACT(Sprite):
     def __init__(self, facts, Line, Color):
         fact = TextAsset(text = facts, style ='18px Helvetica', width = 0.3*width-15)
-        box = RectangleAsset(0.3*width - 10, fact.height, line, Color)
+        box = RectangleAsset(0.3*width - 10, fact.height, Line, Color)
         self.BOX = Sprite(box, (0.7*width - 10, 0.8*height))
         super().__init__(fact, (0.7*width, 0.8*height))
     
@@ -91,44 +90,47 @@ class Correct(Sprite):
     def __init__(self,x,y):
         correct = ImageAsset("images/white_correct.png")
         super().__init__(correct, (x,y))
-        self.vx = 0
-        self.vy = 0
         
     def invisible(self):
         self.visible = False
+        #go = False
 
     def action(self):
-        self.vx += randint(0,4)/10
-        self.vy += randint(0,4)/10
-        self.x += randint(10,30)*sin(self.vx)
-        self.y += randint(10,30)*cos(self.vy)
+        self.x += randint(-20,20)
+        self.y += randint(-20,20)
 
 class Instructions(Sprite):
     def __init__(self,instruct,position, wid):
         instruction = TextAsset(text = instruct, style ='18px Helvetica', width = wid)
         super().__init__(instruction, position)
-        
+
 class Blinkers(Sprite):
-    def __init(self):
-        size = 15
-        self.box = Sprite(RectangleAsset(45,25, line, white), (0.8*width - 5, 0.9*height - 5))
-        self.yes = Sprite(CircleAsset(size, line, Bright_Green), (0.8*width, 0.9*height))
-        self.no = Sprite(CircleAsset(size, line, Bright_Red), (0.8*width + 20, 0.9*height))
-        self.y = Sprite(CircleAsset(size, line, Mute_Green), (0.8*width, 0.9*height))
-        self.n = Sprite(CircleAsset(size, line, Mute_Red), (0.8*width + 20, 0.9*height))
+    size = 15*width/1000
+    box = RectangleAsset(5.5*size,3*size, line, white)
+    yes = CircleAsset(size, line, Bright_Green)
+    no = CircleAsset(size, line, Bright_Red)
+    yes_off = CircleAsset(size, line, Mute_Green)
+    no_off = CircleAsset(size, line, Mute_Red)
+    
+    def __init__(self):
+        self.BOX = Sprite(self.box, (0.85*width - self.size/2, 0.9*height - self.size/2))
+        self.YES_off = Sprite(self.yes_off, (0.85*width, 0.9*height))
+        self.NO_off = Sprite(self.no_off, (0.85*width + 2.5*self.size, 0.9*height))
+        self.YES = Sprite(self.yes, (0.85*width, 0.9*height))
+        self.NO = Sprite(self.no, (0.85*width + 2.5*self.size, 0.9*height))
+
     
     def invisible(self):
-        self.box.visible = False
-        self.yes.visible = False
-        self.no.visible = False
-        self.y.visible = False
-        self.n.visible = False
+        self.YES.visible = False
+        self.NO.visible = False
+        self.YES_off.visible = False
+        self.NO_off.visible = False
+        self.BOX.visible = False
         
     def visible(self):
-        self.box.visible = True
-        self.y.visible = True
-        self.n.visible = True
-        
+        self.BOX.visible = True
+        self.YES_off.visible = True
+        self.NO_off.visible = True
 
 #------------    INSTRUCTIONS    --------------------------------------------------------------------------#
 Gbox = RectangleAsset(350,0.08*height, line, Pink)
@@ -162,8 +164,8 @@ yay.invisible()
 capitalQ = False
 stateQ = False
 Time = False
-correct = Blinkers()
-correct.invisible()
+yesno = Blinkers()
+yesno.invisible()
 
 #----------   STATE DATA    -----------------------------------------------------------------------------#
 states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Lousiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
@@ -179,7 +181,7 @@ def rand_state():
         states_used.append(r_state)
     elif len(states_used) == 50:
         Time = False
-        yay = Correct(width/4,height/4)
+        yay = Correct(width/2,height/2)
         go = True
         r = 0
         q = 0
@@ -237,10 +239,7 @@ def ask():
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
-            
             yay = Correct(0.7*width,0.8*height)
-            yay.scale = (0.3*width)/yay.width
-            print(yay.width,0.3*width)
         else:
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
@@ -253,7 +252,7 @@ def visible():
         GF.visible = False
         GC.visible = False
         Gbox.visible = False
-        correct.visible()
+        yesno.visible()
     else: 
         GF.visible = True
         GC.visible = True
@@ -262,8 +261,7 @@ def visible():
         Fbox.visible = False
         Cbox.visible = False
         Gbox.visible = True
-        time.visible = False
-        correct.invisible()
+        yesno.invisible()
     
     if stateQ == True:
         F.visible = True
@@ -280,9 +278,6 @@ def step():
         if r == 3:
             yay.action()
             r = 0
-    if q == 300:
-        go = False
-        
     if Time == True:
         if t == 0:
             time.visible = False
@@ -299,6 +294,9 @@ def step():
         else:
             o += 1
     
+    if q == 300:
+        go = False
+
 #--------   KEY EVENTS    ------------------------------------------------------------------------------#
 def capitalquiz(event):
     global capitalQ, i, states_used
