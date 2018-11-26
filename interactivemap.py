@@ -5,6 +5,7 @@
 from ggame import *
 from random import randint
 import random
+from math import *
 
 myapp = App()
 
@@ -86,14 +87,18 @@ class Correct(Sprite):
     def __init__(self,x,y):
         correct = ImageAsset("images/white_correct.png")
         super().__init__(correct, (x,y))
+        self.vx = 0
+        self.vy = 0
         
     def invisible(self):
         self.visible = False
         #go = False
 
     def action(self):
-        self.x += randint(-20,20)
-        self.y += randint(-20,20)
+        self.vx += randint(0,4)/10
+        self.vy += randint(0,4)/10
+        self.x += randint(10,30)*sin(self.vx)
+        self.y += randint(10,30)*cos(self.vy)
 
 class Instructions(Sprite):
     def __init__(self,instruct,position, wid):
@@ -147,7 +152,7 @@ def rand_state():
         states_used.append(r_state)
     elif len(states_used) == 50:
         Time = False
-        yay = Correct(width/2,height/2)
+        yay = Correct(width/4,height/4)
         go = True
         r = 0
         q = 0
@@ -226,6 +231,7 @@ def visible():
         Fbox.visible = False
         Cbox.visible = False
         Gbox.visible = True
+        time.visible = False
     
     if stateQ == True:
         F.visible = True
@@ -242,6 +248,9 @@ def step():
         if r == 3:
             yay.action()
             r = 0
+    if q == 300:
+        go = False
+        
     if Time == True:
         if t == 0:
             time.visible = False
@@ -258,9 +267,6 @@ def step():
         else:
             o += 1
     
-    if q == 300:
-        go = False
-
 #--------   KEY EVENTS    ------------------------------------------------------------------------------#
 def capitalquiz(event):
     global capitalQ, i, states_used
