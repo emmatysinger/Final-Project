@@ -90,14 +90,17 @@ class Correct(Sprite):
     def __init__(self,x,y):
         correct = ImageAsset("images/white_correct.png")
         super().__init__(correct, (x,y))
+        self.vx = 0
+        self.vy = 0
         
     def invisible(self):
         self.visible = False
-        #go = False
 
     def action(self):
-        self.x += randint(-20,20)
-        self.y += randint(-20,20)
+        self.vx += randint(0,4)/10
+        self.vy += randint(0,4)/10
+        self.x += randint(10,30)*sin(self.vx)
+        self.y += randint(10,30)*cos(self.vy)
 
 class Instructions(Sprite):
     def __init__(self,instruct,position, wid):
