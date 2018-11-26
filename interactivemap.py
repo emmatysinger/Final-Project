@@ -16,6 +16,10 @@ Medium_Aquamarine = Color(0x66cdaa, 1)
 Pink = Color(0xeea2ad, 1)
 line = LineStyle(1, black)
 no_line = LineStyle(1, white)
+Bright_Green = Color(0x00C957, 1)
+Bright_Red = Color(0xEE2C2C, 1)
+Mute_Green = Color(0x00C957, 0.4)
+Mute_Red = Color(0xEE2C2C, 0.4)
 
 #-----------    CREATE MAP ----------------------------------------------------------------------------#
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
@@ -74,7 +78,7 @@ class Timer(Sprite):
 class FACT(Sprite):
     def __init__(self, facts, Line, Color):
         fact = TextAsset(text = facts, style ='18px Helvetica', width = 0.3*width-15)
-        box = RectangleAsset(0.3*width - 10, fact.height, Line, Color)
+        box = RectangleAsset(0.3*width - 10, fact.height, line, Color)
         self.BOX = Sprite(box, (0.7*width - 10, 0.8*height))
         super().__init__(fact, (0.7*width, 0.8*height))
     
@@ -92,7 +96,6 @@ class Correct(Sprite):
         
     def invisible(self):
         self.visible = False
-        #go = False
 
     def action(self):
         self.vx += randint(0,4)/10
@@ -104,6 +107,28 @@ class Instructions(Sprite):
     def __init__(self,instruct,position, wid):
         instruction = TextAsset(text = instruct, style ='18px Helvetica', width = wid)
         super().__init__(instruction, position)
+        
+class Blinkers(Sprite):
+    def __init(self):
+        size = 15
+        self.box = Sprite(RectangleAsset(45,25, line, white), (0.8*width - 5, 0.9*height - 5))
+        self.yes = Sprite(CircleAsset(size, line, Bright_Green), (0.8*width, 0.9*height))
+        self.no = Sprite(CircleAsset(size, line, Bright_Red), (0.8*width + 20, 0.9*height))
+        self.y = Sprite(CircleAsset(size, line, Mute_Green), (0.8*width, 0.9*height))
+        self.n = Sprite(CircleAsset(size, line, Mute_Red), (0.8*width + 20, 0.9*height))
+    
+    def invisible(self):
+        self.box.visible = False
+        self.yes.visible = False
+        self.no.visible = False
+        self.y.visible = False
+        self.n.visible = False
+        
+    def visible(self):
+        self.box.visible = True
+        self.y.visible = True
+        self.n.visible = True
+        
 
 #------------    INSTRUCTIONS    --------------------------------------------------------------------------#
 Gbox = RectangleAsset(350,0.08*height, line, Pink)
@@ -137,6 +162,8 @@ yay.invisible()
 capitalQ = False
 stateQ = False
 Time = False
+correct = Blinkers()
+correct.invisible()
 
 #----------   STATE DATA    -----------------------------------------------------------------------------#
 states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Lousiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
@@ -210,7 +237,10 @@ def ask():
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
+            
             yay = Correct(0.7*width,0.8*height)
+            yay.scale = (0.3*width)/yay.width
+            print(yay.width,0.3*width)
         else:
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
@@ -223,6 +253,7 @@ def visible():
         GF.visible = False
         GC.visible = False
         Gbox.visible = False
+        correct.visible()
     else: 
         GF.visible = True
         GC.visible = True
@@ -232,6 +263,7 @@ def visible():
         Cbox.visible = False
         Gbox.visible = True
         time.visible = False
+        correct.invisible()
     
     if stateQ == True:
         F.visible = True
