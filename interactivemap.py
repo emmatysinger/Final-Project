@@ -17,8 +17,8 @@ line = LineStyle(1, black)
 no_line = LineStyle(1, white)
 Bright_Green = Color(0x00c957, 1)
 Bright_Red = Color(0xee2c2c, 1)
-Mute_Green = Color(0x00c957, 0.4)
-Mute_Red = Color(0xee2c2c, 0.4)
+Mute_Green = Color(0x00c957, 0.25)
+Mute_Red = Color(0xee2c2c, 0.25)
 
 #-----------    CREATE MAP ----------------------------------------------------------------------------#
 MAP = ImageAsset("images/united-states-map-png-4-with-transparent-of-usa.png.jpeg")
@@ -203,7 +203,7 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state, yay, go, r, t, o, time
+    global r_state, yay, go, r, t, o, time, yesno
     rand_state()
     if stateQ == True:
         print("Where is {0}?".format(r_state))
@@ -239,8 +239,11 @@ def ask():
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
         if answer == correct_answer:
-            yay = Correct(0.7*width,0.8*height)
+            yesno.NO.visible = False
+            yesno.YES.visible = True
         else:
+            yesno.NO.visible = True
+            yesno.YES.visible = False
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
 def visible():
@@ -337,7 +340,7 @@ def findstate(event):
     ask()
 
 def facts(event):
-    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count, Time
+    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count, Time, yesno
     determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
         if state == 0:
@@ -356,7 +359,8 @@ def facts(event):
     elif stateQ == True and Time == True:
         visible()
         if r_state == state:
-            print("CORRECT!")
+            yesno.NO.visible = False
+            yesno.YES.visible = True
             c += 1
             count = Counter(c)
             ask()
@@ -366,6 +370,8 @@ def facts(event):
                 count = Counter(c)
             else:
                 print("Sorry that is {0}, please try again".format(state))
+                yesno.NO.visible = True
+                yesno.YES.visible = False
                 c = 0
                 count = Counter(c)
 
