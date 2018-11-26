@@ -204,8 +204,8 @@ def determinestate(x,y):
     for s in range(len(coordinates)):
         state = 0
         m,n = coordinates[s]
-        if abs(int(x)-m) <= dot_size*2 and abs(int(y)-n) <= dot_size*2:
-            d_state = s
+        if int(x)-m <= 2*dot_size and int(x)-m >= 0 and int(y)-n <= 2*dot_size and int(y)-n >= 0:
+            print((int(x)-m),(int(y)-n), 2*dot_size)
             state = states[s]
             break
 
