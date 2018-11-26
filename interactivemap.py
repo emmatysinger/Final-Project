@@ -62,6 +62,7 @@ box = Sprite(blank, (width,height))
 go = 0
 q = 0
 states_used = []
+correct_states = []
 
 #------------    SPRITE CLASSES    --------------------------------------------------------------------------#
 class Counter(Sprite):
@@ -176,13 +177,16 @@ states_facts = {'Alabama':["Montegomery", "4,888,000", "Yellowhammer"], 'Alaska'
 
 #----------   UNIVERSAL FUNCTIONS    ---------------------------------------------------------------------#
 def rand_state():
-    global states, r_state, states_used, go, r, yay, q, stateQ, capitalQ, Time
+    global states, r_state, states_used, go, r, yay, q, stateQ, capitalQ, Time, correct_states
     r_state = random.choice(states)
     if len(states_used) < 50:
         while r_state in states_used:
             r_state = random.choice(states)
         states_used.append(r_state)
     elif len(states_used) == 50:
+        states_used = []
+    
+    if len(correct_states) == 50:
         Time = False
         yay = Correct(width/2,height/2)
         go = True
@@ -206,7 +210,7 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state, yay, go, r, t, o, time, yesno, c, count
+    global r_state, yay, go, r, t, o, time, yesno, c, count, correct_states
     rand_state()
     if stateQ == True:
         print("Where is {0}?".format(r_state))
@@ -246,11 +250,13 @@ def ask():
             yesno.YES.visible = True
             c += 1
             count = Counter(c)
+            correct_states.append(correct_answer)
         else:
             yesno.NO.visible = True
             yesno.YES.visible = False
             c = 0
             count = Counter(c)
+            correct_states = []
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
 def visible():
@@ -309,9 +315,10 @@ def step():
 
 #--------   KEY EVENTS    ------------------------------------------------------------------------------#
 def capitalquiz(event):
-    global capitalQ, i, states_used, count, c
+    global capitalQ, i, states_used, count, c, correct_states
     capitalQ = not capitalQ
     states_used = []
+    correct_states = []
     visible()
     if capitalQ == True:
         c = 0
@@ -332,10 +339,11 @@ def capitalQuiz(event):
 
     
 def findstate(event):           
-    global stateQ, i, c, count, Time, states_used, time
+    global stateQ, i, c, count, Time, states_used, time, correct_states
     stateQ = not stateQ
     Time = not Time
     states_used = []
+    correct_states = []
     visible()
     if stateQ == True:
         c = 0
@@ -348,7 +356,7 @@ def findstate(event):
     ask()
 
 def facts(event):
-    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count, Time, yesno
+    global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count, Time, yesno, correct_states
     determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
         if state == 0:
@@ -371,6 +379,7 @@ def facts(event):
             yesno.YES.visible = True
             c += 1
             count = Counter(c)
+            correct_states.append(r_state)
             ask()
         else:
             if state == 0:
@@ -382,6 +391,8 @@ def facts(event):
                 yesno.YES.visible = False
                 c = 0
                 count = Counter(c)
+                correct_states = []
+                
 
 
 myapp.run(step)
