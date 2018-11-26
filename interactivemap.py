@@ -203,7 +203,7 @@ def determinestate(x,y):
             break
 
 def ask():
-    global r_state, yay, go, r, t, o, time, yesno
+    global r_state, yay, go, r, t, o, time, yesno, c, count
     rand_state()
     if stateQ == True:
         print("Where is {0}?".format(r_state))
@@ -241,9 +241,13 @@ def ask():
         if answer == correct_answer:
             yesno.NO.visible = False
             yesno.YES.visible = True
+            c += 1
+            count = Counter(c)
         else:
             yesno.NO.visible = True
             yesno.YES.visible = False
+            c = 0
+            count = Counter(c)
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
             
 def visible():
@@ -302,13 +306,14 @@ def step():
 
 #--------   KEY EVENTS    ------------------------------------------------------------------------------#
 def capitalquiz(event):
-    global capitalQ, i, states_used
+    global capitalQ, i, states_used, count, c
     capitalQ = not capitalQ
     states_used = []
     visible()
     if capitalQ == True:
+        c = 0
+        count = Counter(0)
         print("You are playing capital quiz")
-
     else:
         print("The capital quiz has ended")
     
