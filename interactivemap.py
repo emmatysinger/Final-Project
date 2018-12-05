@@ -67,17 +67,17 @@ correct_states = []
 #------------    SPRITE CLASSES    --------------------------------------------------------------------------#
 class Counter(Sprite):
     def __init__(self, count):
-        texto = TextAsset(text = str(count), style = '45px Helvetica', color = black)
+        texto = TextAsset(text = str(count), style = '40px Helvetica', color = black)
         super().__init__(texto, (0.01*width, 0.01*height))
         
 class Timer(Sprite):
     def __init__(self, time):
-        texto = TextAsset(text = str(time), style = '45px Helvetica')
+        texto = TextAsset(text = str(time), style = '40px Helvetica')
         super().__init__(texto, (0.94*width, 0.01*height))
 
 class FACT(Sprite):
     def __init__(self, facts, Line, Color):
-        fact = TextAsset(text = facts, style ='18px Helvetica', width = 0.3*width-15)
+        fact = TextAsset(text = facts, style ='15px Helvetica', width = 0.3*width-15)
         box = RectangleAsset(0.3*width - 10, fact.height, Line, Color)
         self.BOX = Sprite(box, (0.7*width - 10, 0.8*height))
         super().__init__(fact, (0.7*width, 0.8*height))
@@ -105,7 +105,7 @@ class Correct(Sprite):
 
 class Instructions(Sprite):
     def __init__(self,instruct,position, wid):
-        instruction = TextAsset(text = instruct, style ='18px Helvetica', width = wid)
+        instruction = TextAsset(text = instruct, style ='15px Helvetica', width = wid)
         super().__init__(instruction, position)
 
 class Blinkers(Sprite):
