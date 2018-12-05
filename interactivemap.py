@@ -33,14 +33,13 @@ if width/mp_w < 0.8*height/mp_h:
 else:
     Map.scale = (0.8*height-20)/mp_h
 
-print(Map.scale)
 #-----------    STATE COORDINATES   --------------------------------------------------------------------------#
 coordinates = []
 # Map.scale = 0.44 with this: coordinates_i = [(740,480), (135,560), (225,415), (610,425), (85,335), (360,320), (965,200), (990,290), (865,573), (805,465), (370,645), (210,170), (670,295), (725,290), (585,245), (495,335), (765,335), (610,505), (1010,100), (905,280), (985,180), (740,205), (565,135), (675,475), (610,340), (310,105), (470,255), (145,260), (975,150), (940,260), (335,425), (910,175), (890,375), (465,110), (790,275), (515,405), (100,145), (875,240), (1015,240), (850,420), (460,180), (740,390), (475,500), (240,295), (950,135), (885,320), (130,60), (825,315), (645,170), (330,205)] 
-coordinates_i = [(545,355),(103,422.5),(170,320),(457,323),(60,240),(271,243),(720,160),(735,215),(640,422.5),(600,353),(283,485),(165,140),(500,225),(440,190),(375,260),(570,260),(457,385),(745,90),(672,215),(715,147),(555,160),(425,120),(500,360),(455,260),(235,83),(355,200),(120,210),(723,122.5),(700,185),(257,323),(680,142),(655,290),(350,95),(587,212),(390,317),(85,120),(655,190),(755,180),(635,325),(545,300),(365,390),(185,230),(705,112),(655,250),(105,53),(615,240),(482,135),(250,160)]
+coordinates_i = [(545,355),(103,422.5),(170,320),(457,323),(60,240),(271,243),(720,160),(735,215),(640,422.5),(600,353),(283,485),(165,140),(500,225),(540,225),(440,190),(375,260),(570,260),(457,385),(745,90),(672,215),(715,147),(555,160),(425,120),(500,360),(455,260),(235,83),(355,200),(120,210),(723,122.5),(700,185),(257,323),(680,142),(655,290),(350,95),(587,212),(390,317),(85,120),(655,190),(755,180),(635,325),(350,145),(545,300),(365,390),(185,230),(705,112),(655,250),(105,53),(615,240),(482,135),(250,160)]
 for s in coordinates_i: 
     x,y = s
-    coordinates.append((x/.323*Map.scale,y/.323*Map.scale))
+    coordinates.append((x/.32291105121293806*Map.scale,y/.32291105121293806*Map.scale))
 
 dot_size = 8/.44*Map.scale
 dot = CircleAsset(dot_size, line, white)
@@ -206,7 +205,7 @@ def determinestate(x,y):
     for s in range(len(coordinates)):
         state = 0
         m,n = coordinates[s]
-        if int(x)-m <= 2*dot_size and int(x)-m >= 0 and int(y)-n <= 2*dot_size and int(y)-n >= 0:
+        if abs(int(x)-m) <= dot_size  and abs(int(y)-n) <= dot_size:
             state = states[s]
             break
 
@@ -353,49 +352,46 @@ def findstate(event):
     else:
         print("'Find the State' game has ended")
         time.visible = False
-
     ask()
 
-print(states)
 def facts(event):
     global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count, Time, yesno, correct_states
-    print("-")
     print(event.x,event.y)
-    # determinestate(event.x,event.y)
-    # if stateQ == False and capitalQ == False:
-    #     if state == 0:
-    #         print("Please try again")
-    #     else:
-    #         visible()
-    #         facts = states_facts[state]
-    #         facts = """
-    # WELCOME TO {0}!
-    # Capital: {1}
-    # Population: {2}
-    # Nickname: The {3} State
-    # """.format(state, facts[0], facts[1], facts[2])
-    #         i = FACT(facts, line, Medium_Aquamarine)
+    determinestate(event.x,event.y)
+    if stateQ == False and capitalQ == False:
+        if state == 0:
+            print("Please try again")
+        else:
+            visible()
+            facts = states_facts[state]
+            facts = """
+    WELCOME TO {0}!
+    Capital: {1}
+    Population: {2}
+    Nickname: The {3} State
+    """.format(state, facts[0], facts[1], facts[2])
+            i = FACT(facts, line, Medium_Aquamarine)
     
-    # elif stateQ == True and Time == True:
-    #     visible()
-    #     if r_state == state:
-    #         yesno.NO.visible = False
-    #         yesno.YES.visible = True
-    #         c += 1
-    #         count = Counter(c)
-    #         correct_states.append(r_state)
-    #         ask()
-    #     else:
-    #         if state == 0:
-    #             print("Please click on the white dot")
-    #             count = Counter(c)
-    #         else:
-    #             print("Sorry that is {0}, please try again".format(state))
-    #             yesno.NO.visible = True
-    #             yesno.YES.visible = False
-    #             c = 0
-    #             count = Counter(c)
-    #             correct_states = []
+    elif stateQ == True and Time == True:
+        visible()
+        if r_state == state:
+            yesno.NO.visible = False
+            yesno.YES.visible = True
+            c += 1
+            count = Counter(c)
+            correct_states.append(r_state)
+            ask()
+        else:
+            if state == 0:
+                print("Please click on the white dot")
+                count = Counter(c)
+            else:
+                print("Sorry that is {0}, please try again".format(state))
+                yesno.NO.visible = True
+                yesno.YES.visible = False
+                c = 0
+                count = Counter(c)
+                correct_states = []
                 
 
 
