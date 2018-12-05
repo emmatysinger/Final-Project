@@ -39,7 +39,7 @@ coordinates = []
 coordinates_i = [(545,355),(103,422.5),(170,320),(457,323),(60,240),(271,243),(720,160),(735,215),(640,422.5),(600,353),(283,485),(165,140),(500,225),(540,225),(440,190),(375,260),(570,260),(457,385),(745,90),(672,215),(715,147),(555,160),(425,120),(500,360),(455,260),(235,83),(355,200),(120,210),(723,122.5),(700,185),(257,323),(680,142),(655,290),(350,95),(587,212),(390,317),(85,120),(655,190),(755,180),(635,325),(350,145),(545,300),(365,390),(185,230),(705,112),(655,250),(105,53),(615,240),(482,135),(250,160)]
 for s in coordinates_i: 
     x,y = s
-    coordinates.append((x/.32291105121293806*Map.scale,y/.32291105121293806*Map.scale))
+    coordinates.append(((x-20)/.32291105121293806*Map.scale+20,(y-20)/.32291105121293806*Map.scale+20))
 
 dot_size = 8/.44*Map.scale
 dot = CircleAsset(dot_size, line, white)
@@ -205,7 +205,7 @@ def determinestate(x,y):
     for s in range(len(coordinates)):
         state = 0
         m,n = coordinates[s]
-        if abs(int(x)-m) <= dot_size  and abs(int(y)-n) <= dot_size:
+        if abs(int(x)-m) <= dot_size + 2 and abs(int(y)-n) <= dot_size + 2:
             state = states[s]
             break
 
@@ -356,7 +356,6 @@ def findstate(event):
 
 def facts(event):
     global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count, Time, yesno, correct_states
-    print(event.x,event.y)
     determinestate(event.x,event.y)
     if stateQ == False and capitalQ == False:
         if state == 0:
