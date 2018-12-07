@@ -54,7 +54,7 @@ for s in coordinates:
 Delaware = LineAsset(scaling(40), scaling(-4), line)
 Delaware = Sprite(Delaware, (scaling(690-20)+20,scaling(215-20)+20))
 RI = LineAsset(scaling(18), scaling(25))
-RI = Sprite(RI, (scaling(733-20) + 20,scaling(152-20)))
+RI = Sprite(RI, (scaling(733-20) + 20,scaling(152-20)+20))
 
 #-----------    VARIABLES   --------------------------------------------------------------------------#
 blank = CircleAsset(1, no_line, white)
@@ -172,6 +172,7 @@ yay = Correct(0,0)
 yay.invisible()
 capitalQ = False
 stateQ = False
+nicknameQ = False
 Time = False
 yesno = Blinkers()
 yesno.invisible()
@@ -262,13 +263,54 @@ def ask():
             count = Counter(c)
             correct_states = []
             print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
+    if nicknameQ == True:
+        nickname = states_facts[r_state]
+        nickname = nickname[2]
+        answer = input("""What state's nickname is The {0} State? 
+        
+        
+        
+        
+        
+        
+         
+         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        """.format(nickname))
+        correct_answer = r_state
+        if answer == correct_answer:
+            yesno.NO.visible = False
+            yesno.YES.visible = True
+            c += 1
+            count = Counter(c)
+            correct_states.append(correct_answer)
+        else:
+            yesno.NO.visible = True
+            yesno.YES.visible = False
+            c = 0
+            count = Counter(c)
+            correct_states = []
+            print ("Incorrect, The {0} State is the nickname of {1}!".format(nickname, correct_answer))
             
 def visible():
     i.invisible()
     yay.invisible()
     count.visible = False
     
-    if stateQ == True or capitalQ == True:
+    if stateQ == True or capitalQ == True or nicknameQ == True:
         GF.visible = False
         GC.visible = False
         Gbox.visible = False
@@ -332,8 +374,12 @@ def capitalquiz(event):
         print("The capital quiz has ended")
     
 def capitalQuiz(event):
-    global go, yay, stateQ, capitalQ, count, Time
+    global go, yay, stateQ, capitalQ, nicknameQ, count, Time
     if capitalQ == True:
+        yay.invisible()
+        visible()
+        ask()
+    if nicknameQ == True:
         yay.invisible()
         visible()
         ask()
@@ -357,6 +403,19 @@ def findstate(event):
         print("'Find the State' game has ended")
         time.visible = False
     ask()
+
+def nicknameQuiz(event):
+    global nicknameQ, i, states_used, count, c, correct_states
+    nicknameQ = not nicknameQ
+    states_used = []
+    correct_states = []
+    visible()
+    if nicknameQ == True:
+        c = 0
+        count = Counter(0)
+        print("You are playing the nickname quiz")
+    else:
+        print("The nickname quiz has ended")
 
 def facts(event):
     global stateQ, capitalQ, states_facts, determinestate,  r_state, ask, i, box, c, count, Time, yesno, correct_states
@@ -403,3 +462,4 @@ myapp.listenKeyEvent('keydown','c', capitalquiz)
 myapp.listenKeyEvent('keydown','f',findstate)
 myapp.listenMouseEvent('click',facts)
 myapp.listenKeyEvent('keydown','space', capitalQuiz)
+myapp.listenKeyEvent('keydown','n', nicknameQuiz)
