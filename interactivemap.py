@@ -142,29 +142,39 @@ class Blinkers(Sprite):
         self.NO_off.visible = True
 
 #------------    INSTRUCTIONS    --------------------------------------------------------------------------#
-Gbox = RectangleAsset(350,0.08*height, line, Pink)
-Gbox = Sprite(Gbox, (0,0.919*height))
+Gbox = RectangleAsset(205,0.16*height, line, Pink)
+Gbox = Sprite(Gbox, (0,0.839*height))
 Fbox = RectangleAsset(275,0.18*height, line, Pink)
 Fbox = Sprite(Fbox, (0,0.819*height))
 Cbox = RectangleAsset(305,0.18*height, line, Pink)
 Cbox = Sprite(Cbox, (0,0.819*height))
+Nbox = RectangleAsset(305,0.18*height, line, Pink)
+Nbox = Sprite(Nbox, (0,0.819*height))
 
-findstate_i = "Press 'f' to play Find the State"
-capitalQ_i = "Press 'c' to play the Capital Quiz"
+General_Instructions = """Games:
+Find the State (press 'f')
+Capital Quiz (press 'c')
+Nickname Quiz (press 'n')"""
+
 instruct_findstate = """You are playing 'Find the State'!
 - Click on the white dot
 - To quit the game press 'f' again"""
 instruct_capitalq = """You are playing capital quiz!
 - For a new question press the spacebar
-- To quit the game press 'c' again"""   
-GF = Instructions(findstate_i, (0.01*width,0.94*height), 150)
-GC = Instructions(capitalQ_i, (0.01*width+175,0.94*height), 150)
+- To quit the game press 'c' again"""  
+instruct_nicknameq = """You are playing the nickname quiz!
+- For a new question press the spacebar
+- To quit the game press 'n' again"""  
+General = Instructions(General_Instructions, (0.01*width, 0.85*height),250)
 F = Instructions(instruct_findstate, (0.01*width,0.85*height), 250)
 C = Instructions(instruct_capitalq, (0.01*width,0.85*height), 280)
+N = Instructions(instruct_nicknameq, (0.01*width,0.85*height), 250)
 F.visible = False
 C.visible = False
+N.visible = False
 Fbox.visible = False
 Cbox.visible = False
+Nbox.visible = False
     
 #----------    MORE VARIABLES   -------------------------------------------------------------------------#
 i = FACT(" ", no_line, white)
@@ -311,15 +321,14 @@ def visible():
     count.visible = False
     
     if stateQ == True or capitalQ == True or nicknameQ == True:
-        GF.visible = False
-        GC.visible = False
+        General.visible = False
         Gbox.visible = False
         yesno.visible()
     else: 
-        GF.visible = True
-        GC.visible = True
+        General.visible = True
         F.visible = False
         C.visible = False
+        N.visible = False
         Fbox.visible = False
         Cbox.visible = False
         Gbox.visible = True
@@ -331,6 +340,9 @@ def visible():
     elif capitalQ == True:
         C.visible = True
         Cbox.visible = True
+    elif nicknameQ == True:
+        N.visible = True
+        Nbox.visible = True
 
 def step():
     global go, r, t, o, stateQ, time, count, Time, q 
