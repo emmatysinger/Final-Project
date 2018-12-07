@@ -50,7 +50,7 @@ for s in coordinates:
 Delaware = LineAsset(40/0.323*Map.scale, -4/.323*Map.scale, line)
 Delaware = Sprite(Delaware, (690/0.323*Map.scale,215/0.323*Map.scale))
 RI = LineAsset(18/0.323*Map.scale, 25/.323*Map.scale, line)
-RI = Sprite(RI, (733/0.323*Map.scale,152/0.323*Map.scale))
+RI = Sprite(RI, ((733-20)/0.323*Map.scale + 20,(152-20)/0.323*Map.scale + 20))
 
 #-----------    VARIABLES   --------------------------------------------------------------------------#
 blank = CircleAsset(1, no_line, white)
