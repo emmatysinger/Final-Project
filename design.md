@@ -28,11 +28,15 @@ There is a function that determines a random state by first choosing a random el
 
 There is a visibility function that when run looks at which of the three modes the interactive map is currently run to determine what is visible. Instructions for each mode are displayed when the respective flag for the mode is set to "True". 
 
-Informational Mode:
+Timer: 
 
+Counter:
+
+YES/NO blinker:
 
 Capital Quiz: There is a flag, capitalQ, which is set off when 'c' is pressed (True). The visibility function is run so the instructions for the capital quiz are shown. In order to be asked a question the user must press the 'spacebar' because if the program were to continually ask a new question once the user inputs their answer, you'd be stuck in an infinite loop and could never leave the quiz. When the spacebar is pressed, the rand_state() function is run. The correct answer is found by entering the random state into the dictionary and finding the capital which is the first element of the states definition. If the user's input is equal to the correct answer then the counter increases by one and the YES/NO blinkers turn green. 
 To exit the capital quiz, 'c' must be pressed again so that the flag, capitalQ is turned off (False). 
 
-Find the State Game: There is a flag, stateQ, which is set off when 'f' is pressed (True). The visibility function is run so the instructions for the Find the State Game are shown.
+Find the State Game: There is a flag, stateQ, which is set off when 'f' is pressed (True) and the game starts. The visibility function is run so the instructions for the Find the State Game are shown. In the findstate(event) function another flag is set off so that the Timer starts and its calls for another function ask() to be run. The function ask() looks to see which flags are turned on (True) so when the Find the State Game is running it asks the user to find a random state (determined by  rand_state()). Once the user clicks, the program determines the state that was clicked (using the algorithm determinestate) and if it is equal to the randomly choosen state the counter increases by one, the timer is reset to 10 seconds and the YES/NO blinkers turn green. To exit the Find the State game, 'f' must be pressed again so that the flag, stateQ is turned off (False).
 
+Informational Mode: This is the default mode so when all flags are turned off it is being run. The coordinates of the 'click' by the user are inputted into the determinestate algorithm. The state that is determined is found in the dictionary of state information (states_facts) and the information is displayed on the screen using a TextAsset. 
