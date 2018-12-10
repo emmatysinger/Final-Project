@@ -24,9 +24,14 @@ I wrote an algorithm to determine which state the user is clicking on. The limit
 A list of the coordinates of each state (the coordinates of the white dot on each state) in alphabetical order is created based on the screen size. 
 When the screen is clicked a function named determinestate(x,y) is run. The x and y coordinates of where the user clicked are the puts. The algorithm looks to see if the difference between the x-coordinate of the click and the x-coordinate of the state is less than twice the radius of the white dot (which is dependent on the screen size). The same is done with the y-coordinates and if both are true then the algorithm stores that state as "state" and stops. If the preceding conditions are false the algorithm runs through every state until it either reaches a match or has compared the clicked coordinates to every state. 
 
+There is a function that determines a random state by first choosing a random element from a list containing all the states. The randomly choosen state is set to the variable r_state and is used by the two games. When a state is choosen it is added to the list states_used. The next time the program is asked to determine a random state, if the length of the states_used list is less than 50, the function makes sure that the randomly choosen state is not already in the states_used list. This ensures that states aren't reused during the same game. Once one of the two games end the states_used list is reset. 
+
+There is a visibility function that when run looks at which of the three modes the interactive map is currently run to determine what is visible. 
+
 Informational Mode:
 
-Capital Quiz:
+
+Capital Quiz: There is a flag, capitalQ, which is set off when 'c' is pressed. 
 
 Find the State Game: 
 
