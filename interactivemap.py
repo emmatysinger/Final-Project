@@ -203,7 +203,7 @@ def high_score(f,c,n):
     Capital Quiz = {1}
     Nickname Quiz = {2}""".format(f,c,n)
     highscores = TextAsset(text = hs, style ='15px Helvetica', width = 150)
-    highscores = Sprite(highscores, (0.4*width, 0.9*height)
+    highscores = Sprite(highscores, (0.4*width, 0.9*height))
 
 #----------   UNIVERSAL FUNCTIONS    ---------------------------------------------------------------------#
 def rand_state():
@@ -238,6 +238,32 @@ def determinestate(x,y):
             state = states[s]
             break
 
+def correct(answer, correct_answer, other):
+    global count, correct_states, c
+    if answer == correct_answer:
+        yesno.NO.visible = False
+        yesno.YES.visible = True
+        c += 1
+        count = Counter(c)
+        correct_states.append(correct_answer)
+        if stateQ == True:
+            ask()
+    elif stateQ == True and answer == 0:
+        print("Please click on the white dot")
+        count = Counter(c)
+    else:
+        yesno.NO.visible = True
+        yesno.YES.visible = False
+        c = 0
+        count = Counter(c)
+        correct_states = []
+        if capitalQ == True:
+            print ("Incorrect, the capital of {0} is {1}!".format(other, correct_answer))
+        elif nicknameQ == True:
+            print ("Incorrect, The {0} State is the nickname of {1}!".format(other, correct_answer))
+        else:
+            print("Sorry that is {0}, please try again".format(answer))
+            
 def ask():
     global r_state, yay, go, r, t, o, time, yesno, c, count, correct_states
     rand_state()
@@ -274,19 +300,7 @@ def ask():
         """.format(r_state))
         correct_answer = states_facts[r_state]
         correct_answer = correct_answer[0]
-        if answer == correct_answer:
-            yesno.NO.visible = False
-            yesno.YES.visible = True
-            c += 1
-            count = Counter(c)
-            correct_states.append(correct_answer)
-        else:
-            yesno.NO.visible = True
-            yesno.YES.visible = False
-            c = 0
-            count = Counter(c)
-            correct_states = []
-            print ("Incorrect, the capital of {0} is {1}!".format(r_state, correct_answer))
+        correct(answer, correct_answer, r_state)
     if nicknameQ == True:
         nickname = states_facts[r_state]
         nickname = nickname[2]
@@ -315,19 +329,7 @@ def ask():
         
         """.format(nickname))
         correct_answer = r_state
-        if answer == correct_answer:
-            yesno.NO.visible = False
-            yesno.YES.visible = True
-            c += 1
-            count = Counter(c)
-            correct_states.append(correct_answer)
-        else:
-            yesno.NO.visible = True
-            yesno.YES.visible = False
-            c = 0
-            count = Counter(c)
-            correct_states = []
-            print ("Incorrect, The {0} State is the nickname of {1}!".format(nickname, correct_answer))
+        correct(answer, correct_answer, nickname)
             
 def visible():
     i.invisible()
@@ -462,25 +464,8 @@ def facts(event):
     
     elif stateQ == True and Time == True:
         visible()
-        if r_state == state:
-            yesno.NO.visible = False
-            yesno.YES.visible = True
-            c += 1
-            count = Counter(c)
-            correct_states.append(r_state)
-            ask()
-        else:
-            if state == 0:
-                print("Please click on the white dot")
-                count = Counter(c)
-            else:
-                print("Sorry that is {0}, please try again".format(state))
-                yesno.NO.visible = True
-                yesno.YES.visible = False
-                c = 0
-                count = Counter(c)
-                correct_states = []
-                
+        correct(state, r_state, 0)
+
 
 
 myapp.run(step)
