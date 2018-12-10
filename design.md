@@ -26,12 +26,13 @@ When the screen is clicked a function named determinestate(x,y) is run. The x an
 
 There is a function that determines a random state by first choosing a random element from a list containing all the states. The randomly choosen state is set to the variable r_state and is used by the two games. When a state is choosen it is added to the list states_used. The next time the program is asked to determine a random state, if the length of the states_used list is less than 50, the function makes sure that the randomly choosen state is not already in the states_used list. This ensures that states aren't reused during the same game. Once one of the two games end the states_used list is reset. 
 
-There is a visibility function that when run looks at which of the three modes the interactive map is currently run to determine what is visible. 
+There is a visibility function that when run looks at which of the three modes the interactive map is currently run to determine what is visible. Instructions for each mode are displayed when the respective flag for the mode is set to "True". 
 
 Informational Mode:
 
 
-Capital Quiz: There is a flag, capitalQ, which is set off when 'c' is pressed. 
+Capital Quiz: There is a flag, capitalQ, which is set off when 'c' is pressed (True). The visibility function is run so the instructions for the capital quiz are shown. In order to be asked a question the user must press the 'spacebar' because if the program were to continually ask a new question once the user inputs their answer, you'd be stuck in an infinite loop and could never leave the quiz. When the spacebar is pressed, the rand_state() function is run. The correct answer is found by entering the random state into the dictionary and finding the capital which is the first element of the states definition. If the user's input is equal to the correct answer then the counter increases by one and the YES/NO blinkers turn green. 
+To exit the capital quiz, 'c' must be pressed again so that the flag, capitalQ is turned off (False). 
 
-Find the State Game: 
+Find the State Game: There is a flag, stateQ, which is set off when 'f' is pressed (True). The visibility function is run so the instructions for the Find the State Game are shown.
 
