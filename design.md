@@ -28,11 +28,9 @@ There is a function that determines a random state by first choosing a random el
 
 There is a visibility function that when run looks at which of the three modes the interactive map is currently run to determine what is visible. Instructions for each mode are displayed when the respective flag for the mode is set to "True". 
 
-Timer: 
+Timer: There is a Timer class that requires the time input and creates a sprite with that time. The timer is run through the step() function. Every 60 runs through the step function the previous Timer sprite will be made invisible and a new Timer sprite will be created that is one second less. (After multiple tries I found that the step() function runs 60 times/sec). The timer portion of the step function is only run when the flag Time == True, which is turned on for the Find the State Game.  
 
-Counter:
-
-YES/NO blinker:
+Counter: There is a Counter class the requires a count input and creates a sprite with that score. For any of the three games when the user is correct the current Counter sprite is made invisible and a new Counter sprite is created with the count increased by one. If the user is incorrect the count is reset to 0. 
 
 Capital Quiz: There is a flag, capitalQ, which is set off when 'c' is pressed (True). The visibility function is run so the instructions for the capital quiz are shown. In order to be asked a question the user must press the 'spacebar' because if the program were to continually ask a new question once the user inputs their answer, you'd be stuck in an infinite loop and could never leave the quiz. When the spacebar is pressed, the rand_state() function is run. The correct answer is found by entering the random state into the dictionary and finding the capital which is the first element of the states definition. If the user's input is equal to the correct answer then the counter increases by one and the YES/NO blinkers turn green. 
 To exit the capital quiz, 'c' must be pressed again so that the flag, capitalQ is turned off (False). 
