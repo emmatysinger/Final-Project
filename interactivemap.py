@@ -197,13 +197,18 @@ c_hs = 0
 n_hs = 0
 
 def high_score(f,c,n):
+    global highscores
     hs = """
     Your High Scores:
     Find the State = {0}
     Capital Quiz = {1}
     Nickname Quiz = {2}""".format(f,c,n)
     highscores = TextAsset(text = hs, style ='15px Helvetica', width = 150)
-    highscores = Sprite(highscores, (0.4*width, 0.9*height))
+    highscores = Sprite(highscores, (0.4*width, 0.82*height))
+
+HSbox = RectangleAsset(175,0.16*height, line, Pink)
+HSbox = Sprite(HSbox, (0.40*width,0.839*height))
+high_score(f_hs,c_hs,n_hs)
 
 #----------   UNIVERSAL FUNCTIONS    ---------------------------------------------------------------------#
 def rand_state():
@@ -239,7 +244,7 @@ def determinestate(x,y):
             break
 
 def correct(answer, correct_answer, other):
-    global count, correct_states, c
+    global count, correct_states, c, f_hs, c_hs, n_hs, highscores
     if answer == correct_answer:
         yesno.NO.visible = False
         yesno.YES.visible = True
@@ -247,7 +252,21 @@ def correct(answer, correct_answer, other):
         count = Counter(c)
         correct_states.append(correct_answer)
         if stateQ == True:
+            if f_hs < c:
+                f_hs = c
+                highscores.visible = False
+                high_score(f_hs, c_hs, n_hs)
             ask()
+        elif capitalQ == True:
+            if c_hs < c:    
+                c_hs = c
+                highscores.visible = False
+                high_score(f_hs, c_hs, n_hs)
+        elif nicknameQ == True:
+            if n_hs < c:
+                n_hs = c
+                highscores.visible = False
+                high_score(f_hs, c_hs, n_hs)
     elif stateQ == True and answer == 0:
         print("Please click on the white dot")
         count = Counter(c)
