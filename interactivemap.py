@@ -173,6 +173,7 @@ instruct_findstate = """You are playing 'Find the State'!
 - To quit the game press 'f' again"""
 instruct_capitalq = """You are playing capital quiz!
 - For a new question press the spacebar
+- Capitalize you answer
 - To quit the game press 'c' again"""  
 instruct_nicknameq = """You are playing the nickname quiz!
 - For a new question press the spacebar
@@ -224,7 +225,7 @@ high_score(f_hs,c_hs,n_hs)
 
 #----------   UNIVERSAL FUNCTIONS    ---------------------------------------------------------------------#
 def rand_state():
-    global states, r_state, states_used, go, r, yay, q, stateQ, capitalQ, Time, correct_states
+    global states, r_state, states_used, go, r, yay, q, stateQ, capitalQ, Time, correct_states, nicknameQ
     r_state = random.choice(states)
     if len(states_used) < 50:
         while r_state in states_used:
@@ -233,7 +234,7 @@ def rand_state():
     elif len(states_used) == 50:
         states_used = []
     
-    if len(correct_states) == 5:
+    if len(correct_states) == 50:
         Time = False
         yay = Correct(width/2,height/2)
         go = True
@@ -245,6 +246,9 @@ def rand_state():
         if capitalQ == True:
             print("CONGRATS! You named the capital of all 50 states")
             capitalQ = False
+        if nicknameQ == True:
+            print("CONGRATS! You know the nickname of all 50 states")
+            nicknameQ = False
 
 def determinestate(x,y):
     global state_int, coordinates, state, states
@@ -417,6 +421,7 @@ def step():
     
     if q == 300:
         go = False
+        visible()
 
 #--------   KEY EVENTS    ------------------------------------------------------------------------------#
 def capitalquiz(event):
@@ -435,11 +440,9 @@ def capitalquiz(event):
 def capitalQuiz(event):
     global go, yay, stateQ, capitalQ, nicknameQ, count, Time
     if capitalQ == True:
-        yay.invisible()
         visible()
         ask()
     if nicknameQ == True:
-        yay.invisible()
         visible()
         ask()
     if stateQ == True:
