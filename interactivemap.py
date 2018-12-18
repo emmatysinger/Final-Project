@@ -96,8 +96,6 @@ class Correct(Sprite):
     def __init__(self,x,y):
         correct = ImageAsset("images/white_correct.png")
         super().__init__(correct, (x,y))
-        # self.vx = 0
-        # self.vy = 0
         self.w = True
         self.center = (0.5, 0.5)
         self.scale = 2
@@ -106,10 +104,6 @@ class Correct(Sprite):
         self.visible = False
 
     def action(self):
-        # self.vx += randint(-4,4)/10
-        # self.vy += randint(-4,4)/10
-        # self.x += self.vx
-        # self.y += self.vy
         if self.scale == 2.75:
             self.w = False
         elif self.scale == 1:
