@@ -96,17 +96,29 @@ class Correct(Sprite):
     def __init__(self,x,y):
         correct = ImageAsset("images/white_correct.png")
         super().__init__(correct, (x,y))
-        self.vx = 0
-        self.vy = 0
+        # self.vx = 0
+        # self.vy = 0
+        self.w = True
+        self.center = (0.5, 0.5)
+        self.scale = 2
         
     def invisible(self):
         self.visible = False
 
     def action(self):
-        self.vx += randint(0,4)/10
-        self.vy += randint(0,4)/10
-        self.x += randint(10,30)*sin(self.vx)
-        self.y += randint(10,30)*cos(self.vy)
+        # self.vx += randint(-4,4)/10
+        # self.vy += randint(-4,4)/10
+        # self.x += self.vx
+        # self.y += self.vy
+        if self.scale == 2.75:
+            self.w = False
+        elif self.scale == 1:
+            self.w = True
+        
+        if self.w == True:    
+            self.scale += 0.125
+        elif self.w == False:
+            self.scale -= 0.125
 
 class Instructions(Sprite):
     def __init__(self,instruct, position, wid):
@@ -221,7 +233,7 @@ def rand_state():
     elif len(states_used) == 50:
         states_used = []
     
-    if len(correct_states) == 50:
+    if len(correct_states) == 5:
         Time = False
         yay = Correct(width/2,height/2)
         go = True
